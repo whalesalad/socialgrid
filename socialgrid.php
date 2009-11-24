@@ -10,21 +10,21 @@ Author URI: http://whalesalad.com
 
 define('WP_DEBUG', true);
 
+// Define global SocialGrid constants
 define('SG_VERSION', 0.1);
 define('SG_NAME', 'SocialGrid');
 define('SG_SLUG', 'socialgrid');
 
+// Define path to SocialGrid libs and direct url to SocialGrid static assets
 define('SG_LIB', dirname(__FILE__).'/lib');
+define('SG_STATIC', WP_PLUGIN_URL.'/'.basename(dirname(__FILE__)).'/static');
 
-// Load Settings Class
+// Load various classes...
 require_once(SG_LIB.'/class.settings.php');
-
-// Load Service Class
 require_once(SG_LIB.'/class.service.php');
-
-// Load SocialGrid class
 require_once(SG_LIB.'/class.socialgrid.php');
 
+// Jump on various WP Admin hooks
 add_action('admin_menu', SG_SLUG.'_add_options_page');
 add_action('admin_post_'.SG_SLUG.'_save', SG_SLUG.'_save_options');
 add_action('init', SG_SLUG.'_settings_head');
@@ -32,32 +32,56 @@ add_action('init', SG_SLUG.'_settings_head');
 // if ($_GET['activated'])
 //     tasty_activate_theme();
 
-function socialgrid_add_options_page(){
+function socialgrid_add_options_page() {
     add_theme_page(__(SG_NAME.' Options', SG_SLUG), __(SG_NAME.' Options', SG_SLUG), 'edit_themes', SG_SLUG.'-options', SG_SLUG.'_options_admin');
 }
 
 function socialgrid_settings_head() {
-    // wp_enqueue_style('tasty-settings-stylesheet', TASTY_STATIC . '/admin.css');
-    // wp_enqueue_script('tasty-admin-js', TASTY_STATIC . '/admin.js');
+    wp_enqueue_style(SG_SLUG.'-admin-stylesheet',  SG_STATIC.'/css/'.SG_SLUG.'-admin.css');
+    wp_enqueue_script(SG_SLUG.'-admin-js', SG_STATIC.'/css/'.SG_SLUG.'-admin.js');
 }
 
-// SocialGrid class. Instantiated in sidebar, renders grid of Social Media buttons.
-$socialgrid = new SG();
+$sg_settings = new SocialGridSettings();
 
 // Admin Page
-function socialgrid_options_admin() { ?>
-    <h2><?php _e(SG_NAME.' Theme Options', SG_SLUG); ?></h2>
+function socialgrid_options_admin() { 
+    // SocialGrid class. Instantiated in sidebar, renders grid of Social Media buttons.
+    $sgadmin = new SGAdmin();
+    
+    ?>
+    <h2><?php _e(SG_NAME.' Options', SG_SLUG); ?></h2>
+    <p>SocialGrid is a widget that you can place in your sidebar that features any of the social network or profile sites you choose. Simply use the 
     
     <div id="socialgrid-admin">
         <div id="socialgrid-header">
             <h3>SOCIALGRID</h3>
-            <a href="#" class="socialgrid-button socialgrid-settings-button">Settings</a>
+            <a href="#" class="socialgrid-button socialgrid-settings-button"><span>Settings</span></a>
         </div>
+        
         <div id="socialgrid-content">
             <ul class="socialgrid-items">
-                
+                <?php $sgadmin->render_buttons() ?>
+                <?php if ($sgadmin->show_add_button()): ?>
+                <li class="socialgrid-item add">+</li>
+                <?php endif ?>
             </ul>
         </div>
     </div>
         
-<?php } ?>
+<?php } 
+
+// Will end up being an RPC call to add a service
+function add_socialgrid_service ($request = 'meow') {
+    global $sg_settings;
+    
+    $services[] = new SocialGridService('vimeo', 'whalesalad');
+    $services[] = new SocialGridService('twitter', 'whalesalad');
+    $services[] = new SocialGridService('myspace', 'whalesalad');
+    
+    $sg_settings->services = $services;
+    $sg_settings->save();
+}
+
+// add_socialgrid_service();
+
+?>

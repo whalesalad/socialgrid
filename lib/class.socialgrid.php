@@ -3,12 +3,11 @@
  * @package WordPress
  * @subpackage SocialGrid
  */
-global $SG_SERVICES;
 
 class SG {
     function __construct() {
         $this->settings = new SocialGridSettings();
-        $this->default_services = $SG_SERVICES;
+        $this->services = $this->settings->services;
     }
     
     function create_button($class, $button) {
@@ -24,6 +23,30 @@ class SG {
             $this->create_button($key, $value);
         }
         echo '</ul>';
+    }
+}
+
+class SGAdmin extends SG {
+    function create_grid_item($service) {
+        // name, description, url
+        // <li class="socialgrid-item add">+</li>
+        $item = '<li class="socialgrid-item '.$service->slug.'">'.$service->name.'</li>';
+        return $item;
+    }
+    
+    function render_buttons() {
+        foreach ($this->services as $service) {
+            $items[] = $this->create_grid_item($service);
+        }
+        echo join($items, "\n");
+    }
+    
+    function show_add_button() {
+        if (count($this->services) < 15) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 ?>

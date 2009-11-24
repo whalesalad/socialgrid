@@ -6,28 +6,19 @@
 
 class SocialGridSettings {
     function __construct() {
-        $this->get_settings();
+        $this->fetch();
     }
     
-    function get_settings() {
+    function fetch() {
         $saved_settings = maybe_unserialize(get_option('socialgrid_settings'));
 
         if (!empty($saved_settings) && is_object($saved_settings)) {
             foreach ($saved_settings as $setting => $value)
                 $this->$setting = $value;
-        } else {
-            $this->reset();
         }
     }
     
-    function save_settings() {
-        $default_settings = $this->defaults();
-        
-        foreach ($default_settings as $setting => $value) {
-            if (!isset($this->$setting))
-                $this->$setting = $default_settings->$setting;
-        }
-        
+    function save() {
         update_option('socialgrid_settings', $this);
     }
     
