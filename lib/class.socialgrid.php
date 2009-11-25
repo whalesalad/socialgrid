@@ -105,21 +105,9 @@ class SG {
 
 class SGAdmin extends SG {
     function inline_service_list() {
-        /*
-            SG_SERVICES = {
-                <?php 
-                foreach ($defaults as $service_name => $service):
-                    echo $service_name.': true,'."\n";
-                endforeach;
-                ?>
-            }
-            
-        */
-        $defaults = $this->default_services;
-        
         $services = array();
 
-        foreach ($defaults as $default => $value) {
+        foreach ($this->default_services as $default => $value) {
             $services[$default] = false;
         }
         

@@ -70,12 +70,14 @@ function socialgrid_options_admin() {
         </div>
         
         <div id="socialgrid-content">
-            <ul class="socialgrid-items" id="socialgrid-home-screen">
-                <?php $sg_admin->render_buttons() ?>
-                <?php if ($sg_admin->show_add_button()): ?>
-                <li class="socialgrid-item-add">+</li>
-                <?php endif ?>
-            </ul>
+            <div class="pane">
+                <ul class="socialgrid-items" id="socialgrid-home-screen">
+                    <?php $sg_admin->render_buttons() ?>
+                    <?php if ($sg_admin->show_add_button()): ?>
+                    <li class="socialgrid-item-add">+</li>
+                    <?php endif ?>
+                </ul>
+            </div>
         </div>
     </div>
         

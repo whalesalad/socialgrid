@@ -47,9 +47,23 @@
                 background-position: 0 -24px;
             }
             
+    #socialgrid-content {
+        position: relative;
+    }
 
+    div.pane {
+        position: absolute;
+    }
+    
+        div.pane h3 {
+            text-align: center;
+            color: #EEE;
+            margin-bottom: 0;
+        }
+    
     ul.socialgrid-items {
-        padding: 10px 10px 40px 10px;
+        margin-left: -10px;
+        padding: 15px 25px 40px 25px;
     }
     
     ul.socialgrid-items:after {
@@ -64,7 +78,7 @@
     ul.socialgrid-items li.socialgrid-item-add {
         width: 32px;
         height: 32px;
-        margin: 0 10px 10px 0;
+        margin: 0 0 10px 10px;
         display: block;
         text-indent: -9999em;
         float: left;
