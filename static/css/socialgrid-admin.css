@@ -108,7 +108,8 @@
         div.socialgrid-edit-header.vimeo { background-image: url(../img/icons/vimeo.png); }
         div.socialgrid-edit-header.youtube { background-image: url(../img/icons/youtube.png); }
         
-        div.socialgrid-edit-header span {
+        div.socialgrid-edit-header span.socialgrid-service-name,
+        div.socialgrid-edit-header span.socialgrid-service-meta {
             display: block;
         }
         
@@ -120,6 +121,11 @@
             div.socialgrid-edit-header span.socialgrid-service-meta {
                 font-size: 12px;
                 color: #CCC;
+            }
+            
+            div.socialgrid-edit-header span.socialgrid-username-replace {
+                color: #FFF;
+                font-weight: bold;
             }
         
         div.socialgrid-edit-content {

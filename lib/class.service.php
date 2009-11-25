@@ -4,21 +4,17 @@
  * @subpackage SocialGrid
  */
 
-global $sg_settings, $sg_admin;
-
-function get_default_service($service) {
-    return $sg_admin->default_services[$service];
-}
+global $sg_settings;
 
 class SocialGridService {
     public $name = null;
     public $description = null;
     public $url = null;
     
-    function __construct($type, $username, $index) {
-        $skeleton = get_default_service($type);
+    function __construct($service, $username, $index) {
+        $skeleton = $sg_admin->default_services[$service];
         
-        $this->slug = $type;
+        $this->slug = $service;
         $this->name = $skeleton['name'];
         $this->description = $skeleton['text'];
         $this->url = $this->construct_url($skeleton['url'], $username);

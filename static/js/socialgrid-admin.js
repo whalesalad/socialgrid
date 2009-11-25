@@ -5,7 +5,6 @@ SocialGridAdmin = {
         var sg = this;
         
         this.items = _$('#socialgrid-home-screen');
-        // sg.home_screen = this.items;
         
         // Make the items sortable
         _$('.socialgrid-items').sortable({
@@ -69,7 +68,7 @@ SocialGridAdmin = {
         sg.service_screen_html = new Array(
             '<div class="socialgrid-edit-header '+slug+'">',
                 '<span class="socialgrid-service-name">'+service['name']+'</span>',
-                '<span class="socialgrid-service-meta">'+service['url']+'</span>',
+                '<span class="socialgrid-service-meta">'+sg.parse_url(service['url'], 'username')+'</span>',
             '</div>',
             '<div class="socialgrid-edit-content">',
                 '<p>Enter your '+service['name']+' username:</p>',
@@ -83,11 +82,25 @@ SocialGridAdmin = {
             'id': slug+'-input'
         }).appendTo('.socialgrid-edit-content');
         
+        sg.service_input.bind('keyup', function(event) {
+            var value = (_$(this).val()) ? _$(this).val() : 'username';
+            
+            _$('span.socialgrid-service-meta').html(sg.parse_url(service['url'], value));
+            
+        });
+
+        // Bind to the enter key to trigger the add_service
+        sg.service_input.bind('keypress', function(event) {
+            if (event.keyCode == 13)
+                sg.service_screen.trigger('add_service');
+        });
+        
+        
         sg.service_footer = _$('<div/>').addClass('socialgrid-service-footer').hide();
         
         // Add a save button
         sg.service_footer.append(sg.create_edit_button('green', 'Save', function() {
-            alert('save')
+            sg.service_screen.trigger('add_service');
         }));
         
         // Add a cancel button
@@ -98,11 +111,57 @@ SocialGridAdmin = {
         sg.add_screen.hide('slide', { direction: 'left' }, 500);
         sg.service_screen.show('slide', { direction: 'right' }, 500, function() {
             _$('#socialgrid-content').append(sg.service_footer);
+            sg.service_input.focus();
             sg.service_footer.fadeIn();
         });
         
-        
-        
+        // Create the binding for submission
+        sg.service_screen.bind('add_service', function(event) {
+            username = sg.service_input.val();
+            if (!username) {
+                alert('Please enter a valid username!');
+            } else {
+                sg.remote_edit(slug, username);
+            }
+            
+        });
+    },
+    
+    // RPC to save a new or edit a current service
+    remote_edit: function(service, username) {
+        var sg = this;
+
+        if (SG_SERVICES[service]) {
+            // EDIT
+            console.log('Updating existing service '+service+', username becoming '+username+'.');
+        } else {
+            // CREATE
+            console.log('Creating a new service for user '+username+' on '+service+'.');
+            _$.ajax({
+                url: window.ajaxurl,
+                type: 'POST',
+                data: {
+                    'action': 'add_socialgrid_service',
+                    'service': service,
+                    'username': username
+                },
+
+                success: function(response) {
+                    console.log(response);
+                },
+
+                error: function() {
+                    alert('error')
+                },
+            });
+
+        };
+    },
+    
+    parse_url: function(url, username) {
+        var replacement = /\%s/
+        var username = '<span class="socialgrid-username-replace">'+username+'</span>';
+        return url.replace(replacement, username);
     },
     
     create_edit_button: function(type, text, callback) {

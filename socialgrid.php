@@ -30,6 +30,9 @@ add_action('admin_post_'.SG_SLUG.'_save', SG_SLUG.'_save_options');
 add_action('init', SG_SLUG.'_settings_init');
 add_action('admin_head', SG_SLUG.'_settings_head');
 
+add_action('wp_ajax_add_socialgrid_service', 'socialgrid_add_service');
+
+
 // if ($_GET['activated'])
 //     tasty_activate_theme();
 
@@ -44,7 +47,7 @@ function socialgrid_settings_init() {
 }
 
 $sg_settings = new SocialGridSettings();
-$sg_admin = new SGAdmin();
+$sg_admin = new SGAdmin($sg_settings);
 
 function socialgrid_settings_head() { 
     global $sg_admin; ?>
@@ -84,7 +87,24 @@ function socialgrid_options_admin() {
 <?php } 
 
 // Will end up being an RPC call to add a service
-function add_socialgrid_service ($request = 'meow') {
+function socialgrid_add_service () {
+    global $sg_settings;
+
+    // Get the posted vars
+    $service = $_POST['service'];
+    $username = $_POST['username'];
+    
+    // Create an index
+    $index = count($sg_settings->services);
+    
+    // Create the new setting
+    $sg_settings->services[$service] = new SocialGridService($service, $username, $index);
+    
+    // Save the settings, cross fingers
+    $sg_settings->save();
+}
+
+function reset_services() {
     global $sg_settings;
     
     $services['vimeo'] = new SocialGridService('vimeo', 'whalesalad', 1);
@@ -96,6 +116,6 @@ function add_socialgrid_service ($request = 'meow') {
     // $sg_settings->reset();
 }
 
-// add_socialgrid_service();
+// reset_services();
 
 ?>

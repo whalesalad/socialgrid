@@ -14,7 +14,7 @@ class SG {
         "deviantart" => array(
             "name" => "deviantART",
             "text" => "My deviantART Profile",
-            "url" => "%s.delicious.com/"),
+            "url" => "%s.deviantart.com"),
 
         "digg" => array(
             "name" => "Digg",
@@ -82,8 +82,8 @@ class SG {
             "url" => "youtube.com/user/%s"),
     );
     
-    function __construct() {
-        $this->settings = new SocialGridSettings();
+    function __construct($settings) {
+        $this->settings = $settings;
         $this->services = $this->settings->services;
     }
     
@@ -111,12 +111,13 @@ class SGAdmin extends SG {
             $services[$default] = false;
         }
         
-        foreach ($this->services as $service => $value) {
-            $services[$service] = true;
+        if ($this->services) {
+            foreach ($this->services as $service => $value) {
+                $services[$service] = true;
+            }
         }
         
         return $services;
-        
     }
     
     function create_grid_item($service) {
@@ -124,16 +125,20 @@ class SGAdmin extends SG {
     }
     
     function render_buttons() {
-        // Create a temporary array of the items
-        foreach ($this->services as $service) {
-            $items[$service->index] = $this->create_grid_item($service);
-        }
+        if ($this->services) {
+            // Create a temporary array of the items
+            foreach ($this->services as $service) {
+                $items[$service->index] = $this->create_grid_item($service);
+            }
 
-        // Sort the items by the index
-        ksort($items); 
-        
-        // Spit 'em out
-        echo join($items, "\n");
+            // Sort the items by the index
+            ksort($items); 
+
+            // Spit 'em out
+            echo join($items, "\n");
+        } else {
+            return false;
+        }
     }
     
     function show_add_button() {
