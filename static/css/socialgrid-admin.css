@@ -2,6 +2,7 @@
     background: #000 url(../img/socialgrid-footer.png) bottom left no-repeat;
     width: 250px;
     height: 350px;
+    position: relative;
 }
 
     #socialgrid-header {
@@ -13,7 +14,7 @@
             display: none;
         }
         
-        #socialgrid-header a.socialgrid-button {
+        a.socialgrid-button {
             display: block;
             float: right;
             color: #EEE;
@@ -25,7 +26,7 @@
             text-shadow: 0 1px 0 #000;
         }
         
-            #socialgrid-header a.socialgrid-button span {
+            a.socialgrid-button span {
                 display: block;
                 height: 23px;
                 line-height: 22px;
@@ -34,31 +35,106 @@
                 margin-right: 15px;
             }
         
-        #socialgrid-header a.socialgrid-button:hover {
+        a.socialgrid-button:hover {
             color: #FFF;
+            cursor: pointer;
         }
         
-            #socialgrid-header a.socialgrid-button:focus {
+            a.socialgrid-button:focus {
                 color: #777;
                 background-position: 100% -24px;
             }
             
-            #socialgrid-header a.socialgrid-button:focus span {
+            a.socialgrid-button:focus span {
                 background-position: 0 -24px;
             }
-            
-    #socialgrid-content {
-        position: relative;
-    }
+        
+        a.socialgrid-button.green span,
+        a.socialgrid-button.red span {
+            height: 22px;
+            line-height: 22px;
+        }
+        
+        a.socialgrid-button.green {
+            background: url(../img/save-button.png) top right no-repeat;
+        }
+        
+            a.socialgrid-button.green span {
+                background: url(../img/save-button.png) top left no-repeat;
+            }
+        
+        a.socialgrid-button.red {
+            background: url(../img/cancel-button.png) top right no-repeat;
+        }
 
-    div.pane {
+            a.socialgrid-button.red span {
+                background: url(../img/cancel-button.png) top left no-repeat;
+            }
+        
+    div.socialgrid-pane {
         position: absolute;
+        width: 250px;
+        font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     }
     
-        div.pane h3 {
+        div.socialgrid-pane h3 {
             text-align: center;
             color: #EEE;
             margin-bottom: 0;
+        }
+        
+        div.socialgrid-pane div.socialgrid-edit-header {
+            margin-top: 1px;
+            background-color: #202020;
+            background-repeat: no-repeat;
+            background-position: 10px center;
+            padding: 10px 10px 10px 55px;
+            color: #FFF;
+        }
+        
+        div.socialgrid-edit-header.delicious { background-image: url(../img/icons/delicious.png); }
+        div.socialgrid-edit-header.deviantart { background-image: url(../img/icons/deviantart.png); }
+        div.socialgrid-edit-header.digg { background-image: url(../img/icons/digg.png); }
+        div.socialgrid-edit-header.facebook { background-image: url(../img/icons/facebook.png); }
+        div.socialgrid-edit-header.flickr { background-image: url(../img/icons/flickr.png); }
+        div.socialgrid-edit-header.lastfm { background-image: url(../img/icons/lastfm.png); }
+        div.socialgrid-edit-header.linkedin { background-image: url(../img/icons/linkedin.png); }
+        div.socialgrid-edit-header.myspace { background-image: url(../img/icons/myspace.png); }
+        div.socialgrid-edit-header.rss { background-image: url(../img/icons/rss.png); }
+        div.socialgrid-edit-header.stumbleupon { background-image: url(../img/icons/stumbleupon.png); }
+        div.socialgrid-edit-header.tumblr { background-image: url(../img/icons/tumblr.png); }
+        div.socialgrid-edit-header.twitpic { background-image: url(../img/icons/twitpic.png); }
+        div.socialgrid-edit-header.twitter { background-image: url(../img/icons/twitter.png); }
+        div.socialgrid-edit-header.vimeo { background-image: url(../img/icons/vimeo.png); }
+        div.socialgrid-edit-header.youtube { background-image: url(../img/icons/youtube.png); }
+        
+        div.socialgrid-edit-header span {
+            display: block;
+        }
+        
+            div.socialgrid-edit-header span.socialgrid-service-name {
+                font-size: 18px;
+                font-weight: bold;
+            }
+            
+            div.socialgrid-edit-header span.socialgrid-service-meta {
+                font-size: 12px;
+                color: #CCC;
+            }
+        
+        div.socialgrid-edit-content {
+            padding: 0 10px 10px 55px;
+            color: #FFF;
+        }
+        
+            div.socialgrid-edit-content p {
+                font-size: 11px;
+            }
+        
+        div.socialgrid-service-footer {
+            position: absolute;
+            bottom: 20px;
+            width: 210px;
         }
     
     ul.socialgrid-items {

@@ -70,8 +70,8 @@ function socialgrid_options_admin() {
         </div>
         
         <div id="socialgrid-content">
-            <div class="pane">
-                <ul class="socialgrid-items" id="socialgrid-home-screen">
+            <div class="socialgrid-pane" id="socialgrid-home-screen">
+                <ul class="socialgrid-items">
                     <?php $sg_admin->render_buttons() ?>
                     <?php if ($sg_admin->show_add_button()): ?>
                     <li class="socialgrid-item-add">+</li>
