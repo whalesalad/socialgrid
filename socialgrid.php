@@ -88,7 +88,7 @@ function socialgrid_options_admin() {
 
 // Will end up being an RPC call to add a service
 function socialgrid_add_service () {
-    global $sg_settings;
+    global $sg_settings, $sg_admin;
 
     // Get the posted vars
     $service = $_POST['service'];
@@ -98,7 +98,7 @@ function socialgrid_add_service () {
     $index = count($sg_settings->services);
     
     // Create the new setting
-    $sg_settings->services[$service] = new SocialGridService($service, $username, $index);
+    $sg_settings->services[$service] = new SocialGridService($sg_admin, $service, $username, $index);
     
     // Save the settings, cross fingers
     $sg_settings->save();
@@ -117,5 +117,6 @@ function reset_services() {
 }
 
 // reset_services();
+// $sg_settings->reset();
 
 ?>

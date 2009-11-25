@@ -146,8 +146,17 @@ SocialGridAdmin = {
                     'username': username
                 },
 
-                success: function(response) {
-                    console.log(response);
+                success: function() {
+                    item = _$('<li/>')
+                        .text(SG_DEFAULTS[service]['name'])
+                        .addClass(service)
+                        .addClass('socialgrid-item')
+                        .data('service', service);
+                    
+                    _$('.socialgrid-items').children('li.socialgrid-item-add').before(item);
+                    
+                    sg.return_to_home();
+
                 },
 
                 error: function() {

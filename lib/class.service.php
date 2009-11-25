@@ -11,7 +11,7 @@ class SocialGridService {
     public $description = null;
     public $url = null;
     
-    function __construct($service, $username, $index) {
+    function __construct($sg_admin, $service, $username, $index) {
         $skeleton = $sg_admin->default_services[$service];
         
         $this->slug = $service;
