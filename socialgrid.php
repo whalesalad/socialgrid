@@ -54,6 +54,9 @@ function socialgrid_settings_head() {
     <script type="text/javascript">
         SG_DEFAULTS = <?php echo json_encode($sg_admin->default_services); ?>;
         SG_SERVICES = <?php echo json_encode($sg_admin->inline_service_list()); ?>;
+        jQuery(document).ready(function() {
+            SocialGridAdmin.init();
+        })
     </script>
 <?php }
 

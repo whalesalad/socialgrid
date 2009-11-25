@@ -193,8 +193,3 @@ SocialGridAdmin = {
         sg.items.fadeIn();
     }
 }
-
-_$(document).ready(function() {
-    SocialGridAdmin.init();
-})
-
