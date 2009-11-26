@@ -131,12 +131,12 @@ SocialGridAdmin = {
         
         // Add a cancel button
         sg.service_footer.append(sg.create_edit_button('red', 'Cancel', function() {
-            sg.return_to_home();
+            sg.return_to_home(300);
         }));
         
         sg.add_screen.hide('slide', { direction: 'left' }, 500);
         sg.service_screen.show('slide', { direction: 'right' }, 500, function() {
-            _$('#socialgrid-content').append(sg.service_footer);
+            sg.service_screen.append(sg.service_footer);
             sg.service_input.focus();
             sg.service_footer.fadeIn();
         });
@@ -204,7 +204,7 @@ SocialGridAdmin = {
         
         sg.home_screen.hide('slide', { direction: 'left' }, 500);
         sg.service_screen.show('slide', { direction: 'right' }, 500, function() {
-            _$('#socialgrid-content').append(sg.service_footer);
+            sg.service_screen.append(sg.service_footer);
             sg.service_input.focus();
             sg.service_footer.fadeIn();
         });
@@ -308,11 +308,14 @@ SocialGridAdmin = {
         return button;
     },
     
-    return_to_home: function() {
+    return_to_home: function(speed) {
         var sg = this;
-        sg.home_screen.siblings().hide('explode', {}, 500, function() {
+        
+        var s = 700;
+        
+        sg.home_screen.siblings(':visible').hide('slide', { direction: 'right' }, s, function() {
             _$(this).remove();
         });
-        sg.home_screen.fadeIn();
+        sg.home_screen.show('slide', { direction: 'left' }, s);
     }
 };
