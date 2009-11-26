@@ -71,6 +71,16 @@
                 background: url(../img/cancel-button.png) top left no-repeat;
             }
         
+        a.socialgrid-button.red:focus,
+        a.socialgrid-button.green:focus {
+            background-position: bottom right !important;
+        }
+        
+            a.socialgrid-button.red:focus span,
+            a.socialgrid-button.green:focus span {
+                background-position: bottom left !important;
+            }
+        
     div.socialgrid-pane {
         position: absolute;
         width: 250px;

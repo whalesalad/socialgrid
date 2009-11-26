@@ -253,8 +253,8 @@ SocialGridAdmin = {
                     
                     item = _$('<li/>')
                         .text(SG_DEFAULTS[service]['name'])
-                        .addClass(service)
                         .addClass('socialgrid-item')
+                        .addClass(service)
                         .data('service', service);
                     
                     _$('.socialgrid-items').children('li.socialgrid-item-add').before(item);
