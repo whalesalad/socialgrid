@@ -4,7 +4,7 @@ By Michael Whalen
 
 SocialGrid began as a simple addition to the "Tasty":http://whalesalad.com/tasty, and has evolved into a next generation WordPress plugin for all to incorporate into their sites.
 
-*REQUIREMENTS:* As of now, everything that I create (including this plugin, SocialGrid) require PHP5 to work.
+*REQUIREMENTS:* As of now, everything that I create (including this plugin, SocialGrid) *require PHP5*.
 
 h2. Updates / Changelog
 
@@ -18,7 +18,9 @@ h2. Installation
 
 h2. Problems
 
-If you encounter any problems with SocialGrid, be sure to "email me":mailto:michael@whalesalad.com or "create an issue":http://github.com/whalesalad/socialgrid/issues on Github.
+If you encounter any problems with SocialGrid, be sure to "contact me":http://whalesalad.com/contact or "create an issue":http://github.com/whalesalad/socialgrid/issues on Github.
+
+If you are unable to modify SocialGrid settings, chances are you don't have PHP5 enabled on your server. This reminds me, I need to add a check to my various admin panels to prevent modification if there is anything less than PHP5 installed. If you don't have PHP5 enabled, contact your webhost or search around your hosting admin panel for a setting to enable it.
 
 h2. Modification
 
