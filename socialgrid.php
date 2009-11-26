@@ -42,9 +42,14 @@ function socialgrid_add_options_page() {
 }
 
 function socialgrid_settings_init() {
-    wp_enqueue_style(SG_SLUG.'-admin-stylesheet',  SG_STATIC.'/css/'.SG_SLUG.'-admin.css');
-    wp_enqueue_script(SG_SLUG.'-admin-js', SG_STATIC.'/js/'.SG_SLUG.'-admin.js');
-    wp_enqueue_script(SG_SLUG.'-admin-jquery-ui', SG_STATIC.'/js/jquery-ui-1.7.2.custom.min.js');
+    if (is_admin()) {
+        wp_enqueue_style(SG_SLUG.'-admin-stylesheet',  SG_STATIC.'/css/'.SG_SLUG.'-admin.css');
+        wp_enqueue_script(SG_SLUG.'-admin-js', SG_STATIC.'/js/'.SG_SLUG.'-admin.js');
+        wp_enqueue_script(SG_SLUG.'-admin-jquery-ui', SG_STATIC.'/js/jquery-ui-1.7.2.custom.min.js');
+    } else {
+        wp_enqueue_style(SG_SLUG.'-stylesheet',  SG_STATIC.'/css/'.SG_SLUG.'.css');
+        wp_enqueue_script(SG_SLUG.'-js', SG_STATIC.'/js/'.SG_SLUG.'.js');
+    }
 }
 
 $sg_settings = new SocialGridSettings();
@@ -68,7 +73,8 @@ function socialgrid_options_admin() {
     
     ?>
     <h2><?php _e(SG_NAME.' Options', SG_SLUG); ?></h2>
-    <p>SocialGrid is a widget that you can place in your sidebar that features any of the social network or profile sites you choose. Simply use the 
+    <p>SocialGrid is a widget that you can place in your sidebar that features any of the social network or profile sites you choose.</p>
+    <p><strong>Use the interface below to add and rearrange the services however you'd like. <br/>Socialgrid saves your settings automatically as you interact with it.</strong></p>
     
     <div id="socialgrid-admin">
         <div id="socialgrid-header">
@@ -155,7 +161,23 @@ function reset_services() {
     // $sg_settings->reset();
 }
 
-// reset_services();
-// $sg_settings->reset();
+class SocialGridWidget extends WP_Widget {
+    function SocialGridWidget() {
+        parent::WP_Widget(false, $name = 'SocialGrid');
+    }
+
+    function widget() {
+        global $sg_settings;
+        $sg = new SG($sg_settings);
+        $sg->display();
+    }
+
+    /** @see WP_Widget::form */
+    function form() {
+        echo('<p><strong>You do not edit SocialGrid\'s settings here.</strong> <a href="'.admin_url('themes.php?page=socialgrid-options').'">Click here</a> to edit your SocialGrid widget settings.');
+    }
+}
+
+add_action('widgets_init', create_function('', 'return register_widget("SocialGridWidget");'));
 
 ?>

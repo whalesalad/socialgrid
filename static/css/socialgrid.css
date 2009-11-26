@@ -1,0 +1,37 @@
+ul#socialGrid {
+    margin-left: -10px;
+}
+
+ul#socialGrid:after {
+    content: ".";
+    visibility: hidden;
+    height: 0;
+    display: block;
+    clear: both;
+}
+    
+ul#socialGrid li a {
+    width: 32px;
+    height: 32px;
+    margin: 0 0 10px 10px;
+    display: block;
+    text-indent: -9999em;
+    float: left;
+    z-index: 3000;
+}
+
+ul#socialGrid li.delicious a { background-image: url(../img/icons/delicious.png); }
+ul#socialGrid li.deviantart a { background-image: url(../img/icons/deviantart.png); }
+ul#socialGrid li.digg a { background-image: url(../img/icons/digg.png); }
+ul#socialGrid li.facebook a { background-image: url(../img/icons/facebook.png); }
+ul#socialGrid li.flickr a { background-image: url(../img/icons/flickr.png); }
+ul#socialGrid li.lastfm a { background-image: url(../img/icons/lastfm.png); }
+ul#socialGrid li.linkedin a { background-image: url(../img/icons/linkedin.png); }
+ul#socialGrid li.myspace a { background-image: url(../img/icons/myspace.png); }
+ul#socialGrid li.rss a { background-image: url(../img/icons/rss.png); }
+ul#socialGrid li.stumbleupon a { background-image: url(../img/icons/stumbleupon.png); }
+ul#socialGrid li.tumblr a { background-image: url(../img/icons/tumblr.png); }
+ul#socialGrid li.twitpic a { background-image: url(../img/icons/twitpic.png); }
+ul#socialGrid li.twitter a { background-image: url(../img/icons/twitter.png); }
+ul#socialGrid li.vimeo a { background-image: url(../img/icons/vimeo.png); }
+ul#socialGrid li.youtube a { background-image: url(../img/icons/youtube.png); }
