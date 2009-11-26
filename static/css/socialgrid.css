@@ -9,15 +9,18 @@ ul#socialGrid:after {
     display: block;
     clear: both;
 }
+
+ul#socialGrid li {
+    position: relative;
+    float: left;
+    margin: 0 0 10px 10px;
+}
     
 ul#socialGrid li a {
     width: 32px;
     height: 32px;
-    margin: 0 0 10px 10px;
     display: block;
     text-indent: -9999em;
-    float: left;
-    z-index: 3000;
 }
 
 ul#socialGrid li.delicious a { background-image: url(../img/icons/delicious.png); }
@@ -35,3 +38,49 @@ ul#socialGrid li.twitpic a { background-image: url(../img/icons/twitpic.png); }
 ul#socialGrid li.twitter a { background-image: url(../img/icons/twitter.png); }
 ul#socialGrid li.vimeo a { background-image: url(../img/icons/vimeo.png); }
 ul#socialGrid li.youtube a { background-image: url(../img/icons/youtube.png); }
+
+
+ul#socialGrid li div.tooltip {
+    position: absolute;
+    top: -25px;
+    left: -10px;
+    white-space: nowrap;
+    display: none;
+    z-index: 999;
+}
+
+    ul#socialGrid li div.tooltip:hover {
+        cursor: pointer !important;
+    }
+
+    ul#socialGrid li div.tooltip span.center {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 1.2em;
+        background: url(../img/tooltipCenter.png) top center no-repeat;
+        display: block;
+        padding: 0 10px;
+        line-height: 30px;
+        color: #FFF;
+        font-weight: bold;
+        height: 35px;
+        text-shadow: 0 1px 1px #000;
+    }
+    
+    ul#socialGrid li div.tooltip span.left,
+    ul#socialGrid li div.tooltip span.right {
+        width: 6px;
+        height: 33px;
+        display: block;
+        position: absolute;
+        top: 0;
+    }
+    
+    ul#socialGrid li div.tooltip span.left {
+        background: url(../img/tooltipLeft.png) top left no-repeat;
+        left: -6px;
+    }
+    
+    ul#socialGrid li div.tooltip span.right {
+        background: url(../img/tooltipRight.png) top right no-repeat;
+        right: -6px;
+    }

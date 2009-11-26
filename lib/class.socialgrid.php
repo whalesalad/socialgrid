@@ -18,7 +18,7 @@ class SG {
 
         "digg" => array(
             "name" => "Digg",
-            "text" => "My deviantART Profile",
+            "text" => "Stories I Digg",
             "url" => "digg.com/users/%s"),
 
         "facebook" => array(
