@@ -32,4 +32,19 @@ class SocialGridService {
     }
 }
 
+class SocialGridRSSService {
+    function __construct($sg_admin, $index) {
+        $service = 'rss';
+        $skeleton = $sg_admin->default_services[$service];
+        
+        $this->slug = $service;
+        $this->name = $skeleton['name'];
+        $this->description = $skeleton['text'];
+        $this->url = get_bloginfo('rss2_url');
+        
+        $this->index = $index;
+    }
+}
+
+
 ?>

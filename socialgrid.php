@@ -72,6 +72,11 @@ function socialgrid_options_admin() {
     // SocialGrid class. Instantiated in sidebar, renders grid of Social Media buttons.
     global $sg_admin, $sg_settings;
     
+    // echo ('<pre>');
+    // print_r($sg_settings->services);
+    // echo ('</pre>');
+    
+    
     ?>
     <div id="socialgrid-admin">
         <div id="socialgrid-header">
@@ -102,7 +107,7 @@ function socialgrid_options_admin() {
 // Will end up being an RPC call to add a service
 function socialgrid_add_service_rpc() {
     global $sg_settings, $sg_admin;
-
+    
     // Get the posted vars
     $service = $_POST['service'];
     $username = $_POST['username'];
@@ -111,7 +116,12 @@ function socialgrid_add_service_rpc() {
     $index = count($sg_settings->services);
     
     // Create the new setting
-    $sg_settings->services[$service] = new SocialGridService($sg_admin, $service, $username, $index);
+    if ($service == 'rss') {
+        $new_service = new SocialGridRSSService($sg_admin, $index);
+    } else {
+        $new_service = new SocialGridService($sg_admin, $service, $username, $index);
+    }
+    $sg_settings->services[$service] = $new_service;
     
     // Save the settings, cross fingers
     $sg_settings->save();
@@ -161,8 +171,25 @@ function socialgrid_remove_service_rpc() {
     $service = $_POST['service'];
     
     unset($sg_settings->services[$service]);
+
+    $i = 0;
+    foreach ($sg_settings->services as $service => $value) {
+        $sg_settings->services[$service]->index = $i;
+        $i++;
+    }
+    
+    print_r($sg_settings->services);
     
     $sg_settings->save();
+}
+
+function reindex_services($services) {
+    $i = 0;
+    foreach ($services as $service) {
+        $services[$service]->index = $i;
+        $i++;
+    }
+    return $services;
 }
 
 function reset_services() {

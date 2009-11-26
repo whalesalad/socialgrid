@@ -103,41 +103,58 @@ SocialGridAdmin = {
         
         sg.service_screen = _$('<div/>').addClass('socialgrid-pane').addClass(slug).appendTo('#socialgrid-content');
         
-        sg.service_screen_html = new Array(
-            '<div class="socialgrid-edit-header '+slug+'">',
-                '<span class="socialgrid-service-name">'+service['name']+'</span>',
-                '<span class="socialgrid-service-meta">'+sg.parse_url(service['url'], 'username')+'</span>',
-            '</div>',
-            '<div class="socialgrid-edit-content">',
-                '<p>Enter your '+service['name']+' username:</p>',
-            '</div>'
-            );
-        
-        sg.service_screen.html(sg.service_screen_html.join(''));
-        
-        sg.service_input = _$('<input/>').attr({
-            'name': slug+'-input',
-            'id': slug+'-input'
-        }).appendTo('.socialgrid-edit-content');
-        
-        sg.service_input.bind('keyup', function(event) {
-            var value = (_$(this).val()) ? _$(this).val() : 'username';
+        if (slug == 'rss') {
+            sg.service_screen_html = new Array(
+                '<div class="socialgrid-edit-header '+slug+'">',
+                    '<span class="socialgrid-service-name">'+service['name']+'</span>',
+                    '<span class="socialgrid-service-meta">Your WordPress RSS Feed</span>',
+                '</div>',
+                '<div class="socialgrid-edit-content">',
+                    '<p><strong>This SocialGrid button will link to the RSS feed that WordPress automatically creates for you.</strong></p>',
+                    '<p>If you would like to customize your RSS feed (ex, Feedburner), there are plugins available to do that.</p>',
+                '</div>');
             
-            _$('span.socialgrid-service-meta').html(sg.parse_url(service['url'], value));
+            sg.service_screen.html(sg.service_screen_html.join(''));
             
-        });
+        } else {
+            sg.service_screen_html = new Array(
+                '<div class="socialgrid-edit-header '+slug+'">',
+                    '<span class="socialgrid-service-name">'+service['name']+'</span>',
+                    '<span class="socialgrid-service-meta">'+sg.parse_url(service['url'], 'username')+'</span>',
+                '</div>',
+                '<div class="socialgrid-edit-content">',
+                    '<p>Enter your '+service['name']+' username:</p>',
+                '</div>'
+                );
+            
+            sg.service_screen.html(sg.service_screen_html.join(''));
+            
+            //
+            // SERVICE INPUT
+            //
+            sg.service_input = _$('<input/>').attr({
+                'name': slug+'-input',
+                'id': slug+'-input'
+            }).appendTo('.socialgrid-edit-content');
 
-        // Bind to the enter key to trigger the add_service
-        sg.service_input.bind('keypress', function(event) {
-            if (event.keyCode == 13)
-                sg.service_screen.trigger('add_service');
-        });
+            sg.service_input.bind('keyup', function(event) {
+                var value = (_$(this).val()) ? _$(this).val() : 'username';
+                _$('span.socialgrid-service-meta').html(sg.parse_url(service['url'], value));
+            });
+
+            // Bind to the enter key to trigger the add_service
+            sg.service_input.bind('keypress', function(event) {
+                if (event.keyCode == 13) sg.service_screen.trigger('add_service');
+            });
+        }
         
-        
-        sg.service_footer = _$('<div/>').addClass('socialgrid-service-footer').hide();
+        //
+        // SERVICE FOOTER
+        //
+        sg.service_footer = _$('<div/>').addClass('socialgrid-service-footer').appendTo(sg.service_screen);
         
         // Add a save button
-        sg.service_footer.append(sg.create_edit_button('green', 'Save', function() {
+        sg.service_footer.append(sg.create_edit_button('green', 'Add', function() {
             sg.service_screen.trigger('add_service');
         }));
         
@@ -148,20 +165,22 @@ SocialGridAdmin = {
         
         sg.add_screen.hide('slide', { direction: 'left' }, 500);
         sg.service_screen.show('slide', { direction: 'right' }, 500, function() {
-            sg.service_screen.append(sg.service_footer);
-            sg.service_input.focus();
-            sg.service_footer.fadeIn();
+            if (slug != 'rss') sg.service_input.focus();;
         });
         
         // Create the binding for submission
         sg.service_screen.bind('add_service', function(event) {
-            username = sg.service_input.val();
+            if (slug == 'rss') {
+                username = 'rss';
+            } else {
+                username = sg.service_input.val();
+            }
+            
             if (!username) {
                 alert('Please enter a valid username!');
             } else {
                 sg.remote_edit(slug, username);
             }
-            
         });
     },
     
@@ -175,53 +194,72 @@ SocialGridAdmin = {
         
         sg.service_screen = _$('<div/>').addClass('socialgrid-pane').addClass(slug).appendTo('#socialgrid-content');
         
-        sg.service_screen_html = new Array(
-            '<div class="socialgrid-edit-header '+slug+'">',
-                '<span class="socialgrid-service-name">'+service['name']+'</span>',
-                '<span class="socialgrid-service-meta">'+sg.parse_url(service['url'], username)+'</span>',
-            '</div>',
-            '<div class="socialgrid-edit-content">',
-                '<p>Enter your '+service['name']+' username:</p>',
-            '</div>'
-            );
-        
-        sg.service_screen.html(sg.service_screen_html.join(''));
-        
-        sg.service_input = _$('<input/>').attr({
-            'name': slug+'-input',
-            'id': slug+'-input'
-        }).val(username).appendTo('.socialgrid-edit-content');
-        
-        sg.service_input.bind('keyup', function(event) {
-            var value = (_$(this).val()) ? _$(this).val() : 'username';
+        if (slug == 'rss') {
+            sg.service_screen_html = new Array(
+                '<div class="socialgrid-edit-header '+slug+'">',
+                    '<span class="socialgrid-service-name">'+service['name']+'</span>',
+                    '<span class="socialgrid-service-meta">Your WordPress RSS Feed</span>',
+                '</div>',
+                '<div class="socialgrid-edit-content">',
+                    '<p><strong>This SocialGrid button will link to the RSS feed that WordPress automatically creates for you.</strong></p>',
+                    '<p>If you would like to customize your RSS feed (ex, Feedburner), there are plugins available to do that.</p>',
+                '</div>');
             
-            _$('span.socialgrid-service-meta').html(sg.parse_url(service['url'], value));
+            sg.service_screen.html(sg.service_screen_html.join(''));
             
-        });
+            // Create the footer for the buttons
+            sg.service_footer = _$('<div/>').addClass('socialgrid-service-footer').appendTo(sg.service_screen);
 
-        // Bind to the enter key to trigger the add_service
-        sg.service_input.bind('keypress', function(event) {
-            if (event.keyCode == 13)
+            // Add a cancel button
+            sg.service_footer.append(sg.create_edit_button('red', 'Back', function() {
+                sg.return_to_home();
+            }));
+            
+        } else {
+            sg.service_screen_html = new Array(
+                '<div class="socialgrid-edit-header '+slug+'">',
+                    '<span class="socialgrid-service-name">'+service['name']+'</span>',
+                    '<span class="socialgrid-service-meta">'+sg.parse_url(service['url'], username)+'</span>',
+                '</div>',
+                '<div class="socialgrid-edit-content">',
+                    '<p>Enter your '+service['name']+' username:</p>',
+                '</div>');
+                
+            sg.service_screen.html(sg.service_screen_html.join(''));
+
+            sg.service_input = _$('<input/>').attr({
+                'name': slug+'-input',
+                'id': slug+'-input'
+            }).val(username).appendTo('.socialgrid-edit-content');
+
+            sg.service_input.bind('keyup', function(event) {
+                var value = (_$(this).val()) ? _$(this).val() : 'username';
+                _$('span.socialgrid-service-meta').html(sg.parse_url(service['url'], value));
+            });
+
+            // Bind to the enter key to trigger the add_service
+            sg.service_input.bind('keypress', function(event) {
+                if (event.keyCode == 13)
+                    sg.service_screen.trigger('save_service');
+            });
+
+            // Create the footer for the buttons
+            sg.service_footer = _$('<div/>').addClass('socialgrid-service-footer').appendTo(sg.service_screen);
+
+            // Add a save button
+            sg.service_footer.append(sg.create_edit_button('green', 'Save', function() {
                 sg.service_screen.trigger('save_service');
-        });
-        
-        sg.service_footer = _$('<div/>').addClass('socialgrid-service-footer').hide();
-        
-        // Add a save button
-        sg.service_footer.append(sg.create_edit_button('green', 'Save', function() {
-            sg.service_screen.trigger('save_service');
-        }));
-        
-        // Add a cancel button
-        sg.service_footer.append(sg.create_edit_button('red', 'Cancel', function() {
-            sg.return_to_home();
-        }));
+            }));
+
+            // Add a cancel button
+            sg.service_footer.append(sg.create_edit_button('red', 'Cancel', function() {
+                sg.return_to_home();
+            }));
+        }
         
         sg.home_screen.hide('slide', { direction: 'left' }, 500);
         sg.service_screen.show('slide', { direction: 'right' }, 500, function() {
-            sg.service_screen.append(sg.service_footer);
-            sg.service_input.focus();
-            sg.service_footer.fadeIn();
+            if (slug != 'rss') sg.service_input.focus();
         });
         
         // Create the binding for submission
@@ -263,6 +301,7 @@ SocialGridAdmin = {
             });
         } else {
             // CREATE
+            if (service == 'rss') username == 'rss';
             _$.ajax({
                 url: window.ajaxurl,
                 type: 'POST',
