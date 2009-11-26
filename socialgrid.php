@@ -16,13 +16,13 @@ define('SG_NAME', 'SocialGrid');
 define('SG_SLUG', 'socialgrid');
 
 // Define path to SocialGrid libs and direct url to SocialGrid static assets
-define('SG_LIB', dirname(__FILE__).'/lib');
+define('SG_CLASSES', dirname(__FILE__).'/classes');
 define('SG_STATIC', WP_PLUGIN_URL.'/'.basename(dirname(__FILE__)).'/static');
 
 // Load various classes...
-require_once(SG_LIB.'/class.service.php');
-require_once(SG_LIB.'/class.settings.php');
-require_once(SG_LIB.'/class.socialgrid.php');
+require_once(SG_CLASSES.'/service.php');
+require_once(SG_CLASSES.'/settings.php');
+require_once(SG_CLASSES.'/sg.php');
 
 // Jump on various WP Admin hooks
 add_action('admin_menu', SG_SLUG.'_add_options_page');
