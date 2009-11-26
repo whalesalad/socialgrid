@@ -88,22 +88,28 @@ class SG {
     }
     
     function create_button($service) {
-        echo '<li class="button '.$service->slug.'"><a href="http://'.$service->url.'" target="_blank" title="'.$service->description.'">'.$service->description.'</a></li>';
+        return '<li class="button '.$service->slug.'"><a href="http://'.$service->url.'" target="_blank" title="'.$service->description.'">'.$service->description.'</a></li>';
     }
     
     function display() {
-        if ($this->services) {
+        $services = $this->services;
+
+        if ($services) {
             echo '<ul id="socialGrid">';
+            
+            $grid_items = array();
+            
             // Create a temporary array of the items
-            foreach ($this->services as $service) {
-                $items[$service->index] = $this->create_button($service);
+            foreach ($services as $service) {
+                $grid_items[$service->index] = $this->create_button($service);
             }
 
             // Sort the items by the index
-            ksort($items); 
+            ksort($grid_items);
 
             // Spit 'em out
-            echo join($items, "\n");
+            echo join($grid_items, "\n");
+            
             echo '</ul>';
         } else {
             return false;
