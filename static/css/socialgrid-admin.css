@@ -74,6 +74,7 @@
     div.socialgrid-pane {
         position: absolute;
         width: 250px;
+        height: 310px;
         font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     }
     
@@ -143,6 +144,23 @@
             width: 210px;
         }
     
+    #socialgrid-drop-delete {
+        position: absolute;
+        display: block;
+        bottom: 0;
+        left: 90px;
+        width: 70px;
+        height: 37px;
+        background: url(../img/trash-button.png) top left no-repeat;
+        display: none;
+        border: 5px solid black;
+        border-width: 5px 5px 0 5px;
+    }
+    
+        #socialgrid-drop-delete.acceptable {
+            background-position: bottom left;
+        }
+    
     ul.socialgrid-items {
         margin-left: -10px;
         padding: 15px 25px 40px 25px;
@@ -164,6 +182,7 @@
         display: block;
         text-indent: -9999em;
         float: left;
+        z-index: 3000;
     }
     
     ul.socialgrid-items li.delicious { background-image: url(../img/icons/delicious.png); }

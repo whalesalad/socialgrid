@@ -30,7 +30,8 @@ add_action('admin_post_'.SG_SLUG.'_save', SG_SLUG.'_save_options');
 add_action('init', SG_SLUG.'_settings_init');
 add_action('admin_head', SG_SLUG.'_settings_head');
 
-add_action('wp_ajax_add_socialgrid_service', 'socialgrid_add_service');
+add_action('wp_ajax_add_socialgrid_service', 'socialgrid_add_service_rpc');
+add_action('wp_ajax_remove_socialgrid_service', 'socialgrid_remove_service_rpc');
 
 
 // if ($_GET['activated'])
@@ -83,14 +84,16 @@ function socialgrid_options_admin() {
                     <li class="socialgrid-item-add">+</li>
                     <?php endif ?>
                 </ul>
+                <div id="socialgrid-drop-delete"></div>
             </div>
         </div>
+        
     </div>
         
 <?php } 
 
 // Will end up being an RPC call to add a service
-function socialgrid_add_service () {
+function socialgrid_add_service_rpc() {
     global $sg_settings, $sg_admin;
 
     // Get the posted vars
@@ -104,6 +107,25 @@ function socialgrid_add_service () {
     $sg_settings->services[$service] = new SocialGridService($sg_admin, $service, $username, $index);
     
     // Save the settings, cross fingers
+    $sg_settings->save();
+}
+
+function socialgrid_rearrange_services_rpc() {
+    global $sg_settings;
+    
+    $order = $_POST['service_order'];
+    
+    // Update each of the items with their new order
+    
+}
+
+function socialgrid_remove_service_rpc() {
+    global $sg_settings;
+    
+    $service = $_POST['service'];
+    
+    unset($sg_settings->services[$service]);
+    
     $sg_settings->save();
 }
 

@@ -113,7 +113,7 @@ class SGAdmin extends SG {
         
         if ($this->services) {
             foreach ($this->services as $service => $value) {
-                $services[$service] = true;
+                $services[$service] = $value->username;
             }
         }
         

@@ -17,6 +17,7 @@ class SocialGridService {
         $this->slug = $service;
         $this->name = $skeleton['name'];
         $this->description = $skeleton['text'];
+        $this->username = $username;
         $this->url = $this->construct_url($skeleton['url'], $username);
         $this->index = $index;
     }
