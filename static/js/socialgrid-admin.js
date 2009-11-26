@@ -93,7 +93,9 @@ SocialGridAdmin = {
         
     },
     
-    // Take a service and add it
+    /*
+        ADD SERVICE
+    */
     add_service: function(s) {
         var sg = this,
             slug = s.data('service');
@@ -163,6 +165,9 @@ SocialGridAdmin = {
         });
     },
     
+    /*
+        EDIT SERVICE
+    */
     edit_service: function(slug) {
         var sg = this,
             username = SG_SERVICES[slug],
@@ -197,14 +202,14 @@ SocialGridAdmin = {
         // Bind to the enter key to trigger the add_service
         sg.service_input.bind('keypress', function(event) {
             if (event.keyCode == 13)
-                sg.service_screen.trigger('add_service');
+                sg.service_screen.trigger('save_service');
         });
         
         sg.service_footer = _$('<div/>').addClass('socialgrid-service-footer').hide();
         
         // Add a save button
         sg.service_footer.append(sg.create_edit_button('green', 'Save', function() {
-            sg.service_screen.trigger('add_service');
+            sg.service_screen.trigger('save_service');
         }));
         
         // Add a cancel button
@@ -220,7 +225,7 @@ SocialGridAdmin = {
         });
         
         // Create the binding for submission
-        sg.service_screen.bind('add_service', function(event) {
+        sg.service_screen.bind('save_service', function(event) {
             username = sg.service_input.val();
             if (!username) {
                 alert('Please enter a valid username!');
@@ -237,6 +242,25 @@ SocialGridAdmin = {
 
         if (SG_SERVICES[service]) {
             // EDIT
+            _$.ajax({
+                url: window.ajaxurl,
+                type: 'POST',
+                data: {
+                    'action': 'update_socialgrid_service',
+                    'service': service,
+                    'username': username
+                },
+
+                success: function() {
+                    SG_SERVICES[service] = username;
+                    
+                    sg.return_to_home();
+                },
+
+                error: function() {
+                    alert('error');
+                }
+            });
         } else {
             // CREATE
             _$.ajax({
@@ -249,7 +273,7 @@ SocialGridAdmin = {
                 },
 
                 success: function() {
-                    SG_SERVICES[service] = true;
+                    SG_SERVICES[service] = username;
                     
                     item = _$('<li/>')
                         .text(SG_DEFAULTS[service]['name'])
@@ -267,7 +291,6 @@ SocialGridAdmin = {
                     alert('error');
                 }
             });
-
         };
     },
     
@@ -293,7 +316,10 @@ SocialGridAdmin = {
     // Remove a serivce
     remove_service: function(service) {
         var service_name = service.attr('class').split(' ')[1];
-        // console.log(service_name);
+
+        // Hide the service
+        service.hide();
+        
         _$.ajax({
             url: window.ajaxurl,
             type: 'POST',
@@ -323,11 +349,13 @@ SocialGridAdmin = {
         // type can be red or green
         // callback is the function to exec when done
         button = _$('<a/>')
+            .attr('href', '#')
             .addClass('socialgrid-button')
             .addClass(type)
             .html('<span>'+text+'</span>')
             .bind('click', function() {
                 callback();
+                return false;
             });
         
         return button;

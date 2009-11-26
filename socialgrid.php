@@ -31,6 +31,7 @@ add_action('init', SG_SLUG.'_settings_init');
 add_action('admin_head', SG_SLUG.'_settings_head');
 
 add_action('wp_ajax_add_socialgrid_service', 'socialgrid_add_service_rpc');
+add_action('wp_ajax_update_socialgrid_service', 'socialgrid_update_service_rpc');
 add_action('wp_ajax_remove_socialgrid_service', 'socialgrid_remove_service_rpc');
 add_action('wp_ajax_rearrange_socialgrid_services', 'socialgrid_rearrange_rpc');
 
@@ -72,14 +73,9 @@ function socialgrid_options_admin() {
     global $sg_admin, $sg_settings;
     
     ?>
-    <h2><?php _e(SG_NAME.' Options', SG_SLUG); ?></h2>
-    <p>SocialGrid is a widget that you can place in your sidebar that features any of the social network or profile sites you choose.</p>
-    <p><strong>Use the interface below to add and rearrange the services however you'd like. <br/>Socialgrid saves your settings automatically as you interact with it.</strong></p>
-    
     <div id="socialgrid-admin">
         <div id="socialgrid-header">
             <h3>SOCIALGRID</h3>
-            <a href="#" class="socialgrid-button socialgrid-settings-button"><span>Settings</span></a>
         </div>
         
         <div id="socialgrid-content">
@@ -93,9 +89,14 @@ function socialgrid_options_admin() {
                 <div id="socialgrid-drop-delete"></div>
             </div>
         </div>
-        
     </div>
-        
+
+    <h2><?php _e(SG_NAME.' Options', SG_SLUG); ?></h2>
+    <p>SocialGrid is a widget that you can place in your sidebar that features any of the social network or profile sites you choose.</p>
+    <p><strong>Use the interface below to add and rearrange the services however you'd like. <br/>Socialgrid saves your settings automatically as you interact with it.</strong></p>
+    
+    <p>You configure the <strong>settings</strong> for SocialGrid here on this page. To add SocialGrid to your sidebar<br/>
+        visit the <a href="<?php echo admin_url('widgets.php') ?>">Widget</a> settings area. There you can add SocialGrid to your sidebar and position it wherever you'd like.</p>
 <?php } 
 
 // Will end up being an RPC call to add a service
@@ -115,6 +116,21 @@ function socialgrid_add_service_rpc() {
     // Save the settings, cross fingers
     $sg_settings->save();
 }
+
+function socialgrid_update_service_rpc() {
+    global $sg_settings, $sg_admin;
+
+    // Get the posted vars
+    $service = $_POST['service'];
+    $username = $_POST['username'];
+    
+    // Create the new setting
+    $sg_settings->services[$service]->set_username($username);
+    
+    // Save the settings, cross fingers
+    $sg_settings->save();
+}
+
 
 function socialgrid_rearrange_services_rpc() {
     global $sg_settings;

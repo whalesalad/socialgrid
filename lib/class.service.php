@@ -13,19 +13,23 @@ class SocialGridService {
     
     function __construct($sg_admin, $service, $username, $index) {
         $skeleton = $sg_admin->default_services[$service];
-        
+        $this->skeleton = $skeleton;
+
         $this->slug = $service;
+
         $this->name = $skeleton['name'];
         $this->description = $skeleton['text'];
         $this->username = $username;
-        $this->url = $this->construct_url($skeleton['url'], $username);
         $this->index = $index;
+        
+        // construct the url
+        $this->url = sprintf($skeleton['url'], $username);
     }
     
-    private function construct_url($format, $username) {
-        return sprintf($format, $username);
+    public function set_username($new_username) {
+        $this->username = $new_username;
+        $this->url = sprintf($this->skeleton['url'], $new_username);
     }
 }
-
 
 ?>

@@ -15,6 +15,7 @@ jQuery(function() {
         });
 
         button.hover(function() {
+            tooltip.siblings().stop();
             tooltip.fadeIn('fast');
         }, function() {
             tooltip.fadeOut('fast');
