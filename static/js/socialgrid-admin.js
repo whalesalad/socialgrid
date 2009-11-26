@@ -18,6 +18,16 @@ SocialGridAdmin = {
             },
             stop: function() {
                 sg.dropzone.fadeOut();
+            },
+            update: function(event, ui) {
+                var items = sg.items.children('.socialgrid-item');
+                var post_array = new Array();
+                for (var i=0; i < items.length; i++) {
+                    var item = _$(items[i]);
+                    var klass = item.attr('class').split(' ')[1];
+                    post_array.push(klass);
+                };
+                sg.rearrange_services(post_array);
             }
         });
 
@@ -261,8 +271,23 @@ SocialGridAdmin = {
         };
     },
     
-    remote_rearrange: function() {
-        
+    rearrange_services: function(services) {
+        _$.ajax({
+            url: window.ajaxurl,
+            type: 'POST',
+            data: {
+                'action': 'rearrange_socialgrid_services',
+                'services': services.join('|')
+            },
+
+            success: function(response) {
+                console.log(response);
+            },
+
+            error: function() {
+                alert('error');
+            }
+        });
     },
     
     // Remove a serivce

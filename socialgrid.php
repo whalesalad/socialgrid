@@ -32,7 +32,7 @@ add_action('admin_head', SG_SLUG.'_settings_head');
 
 add_action('wp_ajax_add_socialgrid_service', 'socialgrid_add_service_rpc');
 add_action('wp_ajax_remove_socialgrid_service', 'socialgrid_remove_service_rpc');
-
+add_action('wp_ajax_rearrange_socialgrid_services', 'socialgrid_rearrange_rpc');
 
 // if ($_GET['activated'])
 //     tasty_activate_theme();
@@ -64,7 +64,7 @@ function socialgrid_settings_head() {
 // Admin Page
 function socialgrid_options_admin() { 
     // SocialGrid class. Instantiated in sidebar, renders grid of Social Media buttons.
-    global $sg_admin;
+    global $sg_admin, $sg_settings;
     
     ?>
     <h2><?php _e(SG_NAME.' Options', SG_SLUG); ?></h2>
@@ -117,6 +117,20 @@ function socialgrid_rearrange_services_rpc() {
     
     // Update each of the items with their new order
     
+}
+
+function socialgrid_rearrange_rpc() {
+    global $sg_settings;
+    
+    $services = explode("|", $_POST['services']);
+    
+    $i = 0;
+    foreach ($services as $service) {
+        $sg_settings->services[$service]->index = $i;
+        $i++;
+    }
+    
+    $sg_settings->save();
 }
 
 function socialgrid_remove_service_rpc() {
