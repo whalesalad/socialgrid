@@ -21,6 +21,8 @@ ul#socialGrid li a {
     height: 32px;
     display: block;
     text-indent: -9999em;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 ul#socialGrid li.delicious a { background-image: url(../img/icons/delicious.png); }

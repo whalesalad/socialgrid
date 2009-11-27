@@ -88,7 +88,8 @@ class SG {
     }
     
     function create_button($service) {
-        return '<li class="button '.$service->slug.'"><a href="http://'.$service->url.'" target="_blank" title="'.$service->description.'">'.$service->description.'</a></li>';
+        $prefix = ($service->slug == 'rss') ? '' : 'http://';
+        return '<li class="button '.$service->slug.'"><a href="'.$prefix.$service->url.'" target="_blank" title="'.$service->description.'">'.$service->description.'</a></li>';
     }
     
     function display() {
@@ -127,12 +128,7 @@ class SGAdmin extends SG {
         
         if ($this->services) {
             foreach ($this->services as $service => $value) {
-                if ($service == 'rss') {
-                    $services[$service] = true;
-                } else {
-                    $services[$service] = $value->username;
-                }
-                
+                $servies[$service] = ($service == 'rss') ? true : $value->username;
             }
         }
         
