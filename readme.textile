@@ -8,7 +8,8 @@ SocialGrid began as a simple addition to the "Tasty":http://whalesalad.com/tasty
 
 h2. Updates / Changelog
 
-* *v1.0 (11/26/09)* - This is the initial release of the SocialGrid plugin!
+* *v2.01 (12/03/09)* - Fixed a minor issue with the RSS feed url, and css styling.
+* *v2.0  (11/26/09)* - This is the initial release of the SocialGrid plugin!
 
 h2. Installation
 

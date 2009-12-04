@@ -3,7 +3,7 @@
 Plugin Name: SocialGrid
 Plugin URI: http://whalesalad.com/socialgrid
 Description: SocialGrid makes it easy to include attractive links to your various social media profiles on the web.
-Version: 2.0
+Version: 2.01
 Author: Michael Whalen
 Author URI: http://whalesalad.com
 */
@@ -11,7 +11,7 @@ Author URI: http://whalesalad.com
 define('WP_DEBUG', true);
 
 // Define global SocialGrid constants
-define('SG_VERSION', 2.0);
+define('SG_VERSION', 2.01);
 define('SG_NAME', 'SocialGrid');
 define('SG_SLUG', 'socialgrid');
 
