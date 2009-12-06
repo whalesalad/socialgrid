@@ -1,5 +1,5 @@
 ul#socialGrid {
-    margin: 0 0 0 -10px !important;
+    margin: 0 0 0 -7px !important;
 }
 
 ul#socialGrid:after {
@@ -14,7 +14,16 @@ ul#socialGrid li {
     list-style-type: none !important;
     position: relative;
     float: left;
-    margin: 0 0 10px 10px !important;
+    margin: 0 0 7px 7px !important;
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+/* fix for kubrick raquo's */
+ul#socialGrid li:before {
+    content: "" !important;
 }
     
 ul#socialGrid li a {
@@ -49,7 +58,7 @@ ul#socialGrid li div.tooltip {
     left: -10px;
     white-space: nowrap;
     display: none;
-    z-index: 999;
+    z-index: 12000;
 }
 
     ul#socialGrid li div.tooltip:hover {

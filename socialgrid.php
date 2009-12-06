@@ -46,6 +46,7 @@ function socialgrid_settings_init() {
         wp_enqueue_script(SG_SLUG.'-admin-js', SG_STATIC.'/js/'.SG_SLUG.'-admin.js');
         wp_enqueue_script(SG_SLUG.'-admin-jquery-ui', SG_STATIC.'/js/jquery-ui-1.7.2.custom.min.js');
     } else {
+        wp_enqueue_script('jquery');
         wp_enqueue_style(SG_SLUG.'-stylesheet',  SG_STATIC.'/css/'.SG_SLUG.'.css');
         wp_enqueue_script(SG_SLUG.'-js', SG_STATIC.'/js/'.SG_SLUG.'.js');
     }
