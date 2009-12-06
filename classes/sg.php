@@ -128,7 +128,7 @@ class SGAdmin extends SG {
         
         if ($this->services) {
             foreach ($this->services as $service => $value) {
-                $servies[$service] = ($service == 'rss') ? true : $value->username;
+                $services[$service] = ($service == 'rss') ? true : $value->username;
             }
         }
         
