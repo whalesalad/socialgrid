@@ -72,7 +72,7 @@ function socialgrid_options_admin() {
     <div id="socialgrid-admin">
         <div id="socialgrid-header">
             <h3>SOCIALGRID</h3>
-            <a class="socialgrid-button"><span>Settings</span></a>
+            <a id="socialgrid-settings-button" class="socialgrid-button"><span>Settings</span></a>
         </div>
         
         <div id="socialgrid-content">

@@ -106,7 +106,7 @@
             background-color: #202020;
             background-repeat: no-repeat;
             background-position: 10px center;
-            padding: 10px 10px 10px 55px;
+            padding: 10px 10px 10px 50px;
             color: #FFF;
         }
         
@@ -125,6 +125,20 @@
         div.socialgrid-edit-header.twitter { background-image: url(../img/icons/twitter.png); }
         div.socialgrid-edit-header.vimeo { background-image: url(../img/icons/vimeo.png); }
         div.socialgrid-edit-header.youtube { background-image: url(../img/icons/youtube.png); }
+        
+        div.socialgrid-edit-header.brightkite { background-image: url(../img/icons/brightkite_32.png); }
+        div.socialgrid-edit-header.dopplr { background-image: url(../img/icons/dopplr_32.png); }
+        div.socialgrid-edit-header.friendfeed { background-image: url(../img/icons/friendfeed_32.png); }
+        div.socialgrid-edit-header.picasa { background-image: url(../img/icons/picasa_32.png); }
+        div.socialgrid-edit-header.google { background-image: url(../img/icons/google_32.png); }
+        div.socialgrid-edit-header.ember { background-image: url(../img/icons/ember_32.png); }
+        div.socialgrid-edit-header.qik { background-image: url(../img/icons/qik_32.png); }
+        div.socialgrid-edit-header.readernaut { background-image: url(../img/icons/readernaut_32.png); }
+        div.socialgrid-edit-header.reddit { background-image: url(../img/icons/reddit_32.png); }
+        div.socialgrid-edit-header.posterous { background-image: url(../img/icons/posterous_32.png); }
+        div.socialgrid-edit-header.virb { background-image: url(../img/icons/virb_32.png); }
+        div.socialgrid-edit-header.viddler { background-image: url(../img/icons/viddler_32.png); }
+        
         
         div.socialgrid-edit-header span.socialgrid-service-name,
         div.socialgrid-edit-header span.socialgrid-service-meta {
@@ -154,13 +168,82 @@
             div.socialgrid-edit-content p {
                 font-size: 11px;
             }
-        
-        div.socialgrid-service-footer {
-            text-align: center;
-            position: absolute;
-            bottom: 20px;
-            padding-left: 55px;
+
+        div.socialgrid-settings-pane {
+            width: 220px;
+            padding: 0 15px;
+            color: #FFF;
         }
+        
+            div.socialgrid-settings-pane p,
+            div.socialgrid-settings-pane label {
+                font-size: 11px;
+            }
+            
+            div.socialgrid-settings-pane label {
+                font-weight: bold;
+                margin-left: 5px;
+            }
+            
+            div.socialgrid-settings-pane .field {
+                padding-top: 5px;
+            }
+        
+        div.socialgrid-footer-container {
+            clear: both;
+            float: left;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        ul.socialgrid-footer {
+            padding: 0;
+            margin: 0 auto;
+            float: left;
+            position: relative;
+            left: 50%;
+            list-style-type: none;
+        }
+        
+        ul.socialgrid-footer li {
+            float: left;
+            position: relative;
+            right: 50%;
+        }
+        
+        ul.socialgrid-footer a {
+            width: auto;
+            display: block;
+        }
+        
+        /*
+            .container {clear:both; float:left; width:100%; overflow:hidden;}
+            #menu2 {
+              padding:0; 
+              margin:0 auto; 
+              list-style-type:none;
+              float:left;
+              position:relative; 
+              left:50%;
+              }
+            #menu2 li {
+              float:left; position:relative; right:50%;
+              }
+            #menu2 a {
+              width:auto;
+              display:block;
+              padding:4px 16px;
+              color:#fff; 
+              background:#08c; 
+              border:1px solid #fff; 
+              text-decoration:none;
+              }
+            #menu2 a:hover {
+              color:#000; 
+              background:#d4d4d4;
+              }
+            
+        */
     
     #socialgrid-drop-delete {
         position: absolute;
