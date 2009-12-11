@@ -7,13 +7,9 @@
 global $sg_settings;
 
 class SocialGridService {
-    public $name = null;
-    public $description = null;
-    public $url = null;
-    
     function __construct($sg_admin, $service, $username, $index) {
         $skeleton = $sg_admin->default_services[$service];
-        $this->skeleton = $skeleton;
+        $this->url_skeleton = $skeleton['url'];
 
         $this->slug = $service;
 
@@ -28,7 +24,7 @@ class SocialGridService {
     
     public function set_username($new_username) {
         $this->username = $new_username;
-        $this->url = sprintf($this->skeleton['url'], $new_username);
+        $this->url = sprintf($this->url_skeleton, $new_username);
     }
 }
 
