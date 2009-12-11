@@ -16,6 +16,11 @@
             display: none;
         }
         
+        #socialgrid-header a {
+            position: absolute;
+            right: 0;
+        }
+        
         a.socialgrid-button {
             float: left;
             color: #EEE;
@@ -198,21 +203,34 @@
         z-index: 3000;
     }
     
-    ul.socialgrid-items li.delicious { background-image: url(../img/icons/delicious.png); }
-    ul.socialgrid-items li.deviantart { background-image: url(../img/icons/deviantart.png); }
-    ul.socialgrid-items li.digg { background-image: url(../img/icons/digg.png); }
-    ul.socialgrid-items li.facebook { background-image: url(../img/icons/facebook.png); }
-    ul.socialgrid-items li.flickr { background-image: url(../img/icons/flickr.png); }
-    ul.socialgrid-items li.lastfm { background-image: url(../img/icons/lastfm.png); }
-    ul.socialgrid-items li.linkedin { background-image: url(../img/icons/linkedin.png); }
-    ul.socialgrid-items li.myspace { background-image: url(../img/icons/myspace.png); }
-    ul.socialgrid-items li.rss { background-image: url(../img/icons/rss.png); }
-    ul.socialgrid-items li.stumbleupon { background-image: url(../img/icons/stumbleupon.png); }
-    ul.socialgrid-items li.tumblr { background-image: url(../img/icons/tumblr.png); }
-    ul.socialgrid-items li.twitpic { background-image: url(../img/icons/twitpic.png); }
-    ul.socialgrid-items li.twitter { background-image: url(../img/icons/twitter.png); }
-    ul.socialgrid-items li.vimeo { background-image: url(../img/icons/vimeo.png); }
-    ul.socialgrid-items li.youtube { background-image: url(../img/icons/youtube.png); }
+    ul.socialgrid-items li.brightkite { background-image: url(../img/icons/brightkite_32.png); }
+    ul.socialgrid-items li.dopplr { background-image: url(../img/icons/dopplr_32.png); }
+    ul.socialgrid-items li.friendfeed { background-image: url(../img/icons/friendfeed_32.png); }
+    ul.socialgrid-items li.picasa { background-image: url(../img/icons/picasa_32.png); }
+    ul.socialgrid-items li.google { background-image: url(../img/icons/google_32.png); }
+    ul.socialgrid-items li.ember { background-image: url(../img/icons/ember_32.png); }
+    ul.socialgrid-items li.qik { background-image: url(../img/icons/qik_32.png); }
+    ul.socialgrid-items li.readernaut { background-image: url(../img/icons/readernaut_32.png); }
+    ul.socialgrid-items li.reddit { background-image: url(../img/icons/reddit_32.png); }
+    ul.socialgrid-items li.posterous { background-image: url(../img/icons/posterous_32.png); }
+    ul.socialgrid-items li.virb { background-image: url(../img/icons/virb_32.png); }
+    ul.socialgrid-items li.viddler { background-image: url(../img/icons/viddler_32.png); }
+    
+    ul.socialgrid-items li.delicious { background-image: url(../img/icons/delicious_32.png); }
+    ul.socialgrid-items li.deviantart { background-image: url(../img/icons/deviantart_32.png); }
+    ul.socialgrid-items li.digg { background-image: url(../img/icons/digg_32.png); }
+    ul.socialgrid-items li.facebook { background-image: url(../img/icons/facebook_32.png); }
+    ul.socialgrid-items li.flickr { background-image: url(../img/icons/flickr_32.png); }
+    ul.socialgrid-items li.lastfm { background-image: url(../img/icons/lastfm_32.png); }
+    ul.socialgrid-items li.linkedin { background-image: url(../img/icons/linkedin_32.png); }
+    ul.socialgrid-items li.myspace { background-image: url(../img/icons/myspace_32.png); }
+    ul.socialgrid-items li.rss { background-image: url(../img/icons/rss_32.png); }
+    ul.socialgrid-items li.stumbleupon { background-image: url(../img/icons/stumbleupon_32.png); }
+    ul.socialgrid-items li.tumblr { background-image: url(../img/icons/tumblr_32.png); }
+    ul.socialgrid-items li.twitpic { background-image: url(../img/icons/twitpic_32.png); }
+    ul.socialgrid-items li.twitter { background-image: url(../img/icons/twitter_32.png); }
+    ul.socialgrid-items li.vimeo { background-image: url(../img/icons/vimeo_32.png); }
+    ul.socialgrid-items li.youtube { background-image: url(../img/icons/youtube_32.png); }
 
     ul.socialgrid-items li.socialgrid-item-add { background-image: url(../img/add_service_icon.png); }
     ul.socialgrid-items li.socialgrid-item-add:hover { background-position: -32px 0; cursor: pointer; }

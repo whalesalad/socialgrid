@@ -6,6 +6,7 @@ SocialGridAdmin = {
         
         this.home_screen = _$('#socialgrid-home-screen');
         this.dropzone = _$('#socialgrid-drop-delete');
+        this.settings_button = _$('#socialgrid-settings-button');
         
         this.items = _$('.socialgrid-items');
         
