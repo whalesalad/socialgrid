@@ -1,6 +1,6 @@
-jQuery(function() {
-    jQuery('ul#socialGrid li').each(function(index) {
-        var button = jQuery(this);
+jQuery(function(_$) {
+    _$('#socialGrid li').each(function(index) {
+        var button = _$(this);
 
         // Create a tooltip for each button
         var tooltipContent = new Array(
@@ -8,7 +8,7 @@ jQuery(function() {
             '<span class="center">'+jQuery(this).children('a').text()+'</span>',
             '<span class="right"></span>');
 
-        var tooltip = jQuery('<div/>').attr('class', 'tooltip').html(tooltipContent.join('')).appendTo(jQuery(this));
+        var tooltip = _$('<div/>').attr('class', 'tooltip').html(tooltipContent.join('')).appendTo(button);
 
         tooltip.css('left', -(tooltip.width()/2)+16).bind('click', function(event) {
             window.location = button.children('a').attr('href');
@@ -21,4 +21,4 @@ jQuery(function() {
             tooltip.fadeOut('fast');
         });
     });
-})
+});

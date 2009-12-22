@@ -7,6 +7,8 @@ SocialGridAdmin = {
         this.home_screen = _$('#socialgrid-home-screen');
         this.dropzone = _$('#socialgrid-drop-delete');
         this.settings_button = _$('#socialgrid-settings-button');
+
+        this.mini_icons_enabled = SG_MINI_ICONS;
         
         this.items = _$('.socialgrid-items');
         
@@ -80,6 +82,10 @@ SocialGridAdmin = {
         
         sg.settings_screen.html(settings_html.join(""));
         
+        if (sg.mini_icons_enabled) {
+            _$('#sg-mini-icons').attr('checked', 'checked');
+        }
+        
         sg.reset_button = sg.create_button('Reset', function() {
             // will reset all of SG
             sg.settings_confirm_reset();
@@ -108,7 +114,17 @@ SocialGridAdmin = {
         sg.settings_screen.show('slide', { direction: 'right' }, 500);
         
         sg.settings_screen.bind('save_settings', function(event) {
-            alert('saved!');
+            checkbox = _$('#sg-mini-icons');
+            if (checkbox.attr('checked')) {
+                sg.save_icon_size('mini')
+            } else {
+                sg.save_icon_size('standard')
+            };
+            
+            sg.reset_button.fadeOut('fast', function(){
+                sg.reset_button.remove();
+            });
+            sg.return_to_home();
         });
         
     },
@@ -148,8 +164,7 @@ SocialGridAdmin = {
             sg.reset_button.fadeIn();
         }));
         
-        sg.settings_screen.hide('slide', { direction: 'left' }, 500);
-        sg.reset_screen.show('slide', { direction: 'right' }, 500);
+        sg.switch_screen(sg.settings_screen, sg.reset_screen);
         
     },
     
@@ -481,6 +496,32 @@ SocialGridAdmin = {
         });
     },
     
+    // Save Icon Size
+    save_icon_size: function(size) {
+        var sg = this;
+        
+        _$.ajax({
+            url: window.ajaxurl,
+            type: 'POST',
+            data: {
+                'action': 'toggle_socialgrid_icon_size',
+                'size': size,
+            },
+            
+            success: function() {
+                if (size == 'standard') {
+                    sg.mini_icons_enabled = false;
+                } else {
+                    sg.mini_icons_enabled = true;
+                }
+            },
+            
+            error: function() {
+                alert('error');
+            }
+        });
+    },
+    
     parse_url: function(url, username) {
         var replacement = /\%s/;
         username = '<span class="socialgrid-username-replace">'+username+'</span>';
@@ -533,5 +574,10 @@ SocialGridAdmin = {
         sg.home_screen.show('slide', { direction: 'left' }, s);
         
         sg.settings_button.fadeIn('fast');
+    },
+    
+    switch_screen: function(screen_in, screen_out) {
+        screen_out.hide('slide', { direction: 'left' }, 500);
+        screen_in.show('slide', { direction: 'right' }, 500);
     }
 };

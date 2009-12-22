@@ -84,7 +84,7 @@ class SG {
         "linkedin" => array(
             "name" => "LinkedIn",
             "text" => "My LinkedIn Profile",
-            "url" => "linkedin.com/in/%s"),
+            "url" => "www.linkedin.com/in/%s"),
 
         "myspace" => array(
             "name" => "MySpace",
@@ -151,7 +151,9 @@ class SG {
         $services = $this->services;
 
         if ($services) {
-            echo '<ul id="socialGrid">';
+            $size = ($this->settings->enable_small_icons) ? "mini" : "standard";
+            
+            echo '<ul id="socialGrid" class="'.$size.'">';
             
             $grid_items = array();
             

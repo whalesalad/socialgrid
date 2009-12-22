@@ -3,7 +3,7 @@
 Plugin Name: SocialGrid
 Plugin URI: http://whalesalad.com/socialgrid
 Description: SocialGrid makes it easy to include attractive links to your various social media profiles on the web.
-Version: 2.02
+Version: 2.1
 Author: Michael Whalen
 Author URI: http://whalesalad.com
 */
@@ -11,7 +11,7 @@ Author URI: http://whalesalad.com
 define('WP_DEBUG', true);
 
 // Define global SocialGrid constants
-define('SG_VERSION', 2.02);
+define('SG_VERSION', 2.1);
 define('SG_NAME', 'SocialGrid');
 define('SG_SLUG', 'socialgrid');
 
@@ -35,6 +35,7 @@ add_action('wp_ajax_add_socialgrid_service', 'socialgrid_add_service_rpc');
 add_action('wp_ajax_update_socialgrid_service', 'socialgrid_update_service_rpc');
 add_action('wp_ajax_remove_socialgrid_service', 'socialgrid_remove_service_rpc');
 add_action('wp_ajax_rearrange_socialgrid_services', 'socialgrid_rearrange_rpc');
+add_action('wp_ajax_toggle_socialgrid_icon_size', 'socialgrid_toggle_icon_size_rpc');
 
 function socialgrid_add_options_page() {
     add_theme_page(__(SG_NAME.' Options', SG_SLUG), __(SG_NAME.' Options', SG_SLUG), 'edit_themes', SG_SLUG.'-options', SG_SLUG.'_options_admin');
@@ -60,9 +61,10 @@ function socialgrid_settings_head() {
     <script type="text/javascript">
         SG_DEFAULTS = <?php echo json_encode($sg_admin->default_services); ?>;
         SG_SERVICES = <?php echo json_encode($sg_admin->inline_service_list()); ?>;
+        SG_MINI_ICONS = <?php echo json_encode($sg_admin->settings->enable_small_icons); ?>;
         jQuery(document).ready(function() {
             SocialGridAdmin.init();
-        })
+        });
     </script>
 <?php }
 
@@ -167,11 +169,22 @@ function socialgrid_remove_service_rpc() {
         $i++;
     }
     
-    print_r($sg_settings->services);
-    
     $sg_settings->save();
 }
 
+function socialgrid_toggle_icon_size_rpc() {
+    global $sg_settings;
+    
+    $size = $_POST['size'];
+    
+    if ($size == 'mini') {
+        $sg_settings->enable_small_icons = true;
+    } else if ($size == 'standard') {
+        $sg_settings->enable_small_icons = false;
+    }
+    
+    $sg_settings->save();
+}
 
 // Create the widget
 class SocialGridWidget extends WP_Widget {
