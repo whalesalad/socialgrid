@@ -36,6 +36,7 @@ add_action('wp_ajax_update_socialgrid_service', 'socialgrid_update_service_rpc')
 add_action('wp_ajax_remove_socialgrid_service', 'socialgrid_remove_service_rpc');
 add_action('wp_ajax_rearrange_socialgrid_services', 'socialgrid_rearrange_rpc');
 add_action('wp_ajax_toggle_socialgrid_icon_size', 'socialgrid_toggle_icon_size_rpc');
+add_action('wp_ajax_master_socialgrid_reset', 'socialgrid_master_reset_rpc');
 
 function socialgrid_add_options_page() {
     add_theme_page(__(SG_NAME.' Options', SG_SLUG), __(SG_NAME.' Options', SG_SLUG), 'edit_themes', SG_SLUG.'-options', SG_SLUG.'_options_admin');
@@ -71,6 +72,13 @@ function socialgrid_settings_head() {
 // Admin Page
 function socialgrid_options_admin() { 
     global $sg_admin, $sg_settings; ?>
+    
+    <?php if ($_GET['reloaded']): ?>
+    <div id="updated" class="updated fade">
+        <p><?php echo __('SocialGrid has been reset successfully!', 'socialgrid'); ?></p>
+    </div>
+    <?php endif; ?>
+    
     <div id="socialgrid-admin">
         <div id="socialgrid-header">
             <h3>SOCIALGRID</h3>
@@ -91,11 +99,17 @@ function socialgrid_options_admin() {
     </div>
 
     <h2><?php _e(SG_NAME.' Options', SG_SLUG); ?></h2>
+    
     <p>SocialGrid is a widget that you can place in your sidebar that features any of the social network or profile sites you choose.</p>
     <p><strong>Use the interface below to add and rearrange the services however you'd like. <br/>Socialgrid saves your settings automatically as you interact with it.</strong></p>
     
     <p>You configure the <strong>settings</strong> for SocialGrid here on this page. To add SocialGrid to your sidebar<br/>
         visit the <a href="<?php echo admin_url('widgets.php') ?>">Widget</a> settings area. There you can add SocialGrid to your sidebar and position it wherever you'd like.</p>
+    
+    <br/>
+    
+    <p>If you like what you see here, <a href="http://whalesalad.com/tasty" target="_blank">check out Tasty</a>, a WordPress theme also created by Michael Whalen.</p>
+    <p><small>The icons used in SocialGrid were created by <a target="_blank" href="http://www.komodomedia.com/blog/2009/06/social-network-icon-pack/">Rogie King of Komodo Media</a>.</small></p>
 <?php } 
 
 
@@ -184,6 +198,12 @@ function socialgrid_toggle_icon_size_rpc() {
     }
     
     $sg_settings->save();
+}
+
+function socialgrid_master_reset_rpc() {
+    global $sg_settings;
+    
+    $sg_settings->reset();
 }
 
 // Create the widget

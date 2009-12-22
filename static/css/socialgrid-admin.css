@@ -215,35 +215,6 @@
             width: auto;
             display: block;
         }
-        
-        /*
-            .container {clear:both; float:left; width:100%; overflow:hidden;}
-            #menu2 {
-              padding:0; 
-              margin:0 auto; 
-              list-style-type:none;
-              float:left;
-              position:relative; 
-              left:50%;
-              }
-            #menu2 li {
-              float:left; position:relative; right:50%;
-              }
-            #menu2 a {
-              width:auto;
-              display:block;
-              padding:4px 16px;
-              color:#fff; 
-              background:#08c; 
-              border:1px solid #fff; 
-              text-decoration:none;
-              }
-            #menu2 a:hover {
-              color:#000; 
-              background:#d4d4d4;
-              }
-            
-        */
     
     #socialgrid-drop-delete {
         position: absolute;

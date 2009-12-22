@@ -21,6 +21,11 @@ ul#socialGrid li {
     border: none !important;
 }
 
+ul#socialGrid.mini li {
+    width: 16px !important;
+    height: 16px !important;
+}
+
 /* fix for kubrick raquo's */
 ul#socialGrid li:before {
     content: "" !important;
@@ -33,6 +38,13 @@ ul#socialGrid li a {
     text-indent: -9999em;
     padding: 0 !important;
     margin: 0 !important;
+    outline: none !important;
+}
+
+ul#socialGrid.mini li a {
+    width: 16px;
+    height: 16px;
+    
 }
 
 ul#socialGrid li.delicious a { background-image: url(../img/icons/delicious_32.png); }
@@ -63,7 +75,33 @@ ul#socialGrid li.posterous a { background-image: url(../img/icons/posterous_32.p
 ul#socialGrid li.virb a { background-image: url(../img/icons/virb_32.png); }
 ul#socialGrid li.viddler a { background-image: url(../img/icons/viddler_32.png); }
 
-
+ul#socialGrid.mini li.delicious a { background-image: url(../img/icons/delicious_16.png); }
+ul#socialGrid.mini li.deviantart a { background-image: url(../img/icons/deviantart_16.png); }
+ul#socialGrid.mini li.digg a { background-image: url(../img/icons/digg_16.png); }
+ul#socialGrid.mini li.facebook a { background-image: url(../img/icons/facebook_16.png); }
+ul#socialGrid.mini li.flickr a { background-image: url(../img/icons/flickr_16.png); }
+ul#socialGrid.mini li.lastfm a { background-image: url(../img/icons/lastfm_16.png); }
+ul#socialGrid.mini li.linkedin a { background-image: url(../img/icons/linkedin_16.png); }
+ul#socialGrid.mini li.myspace a { background-image: url(../img/icons/myspace_16.png); }
+ul#socialGrid.mini li.rss a { background-image: url(../img/icons/rss_16.png); }
+ul#socialGrid.mini li.stumbleupon a { background-image: url(../img/icons/stumbleupon_16.png); }
+ul#socialGrid.mini li.tumblr a { background-image: url(../img/icons/tumblr_16.png); }
+ul#socialGrid.mini li.twitpic a { background-image: url(../img/icons/twitpic_16.png); }
+ul#socialGrid.mini li.twitter a { background-image: url(../img/icons/twitter_16.png); }
+ul#socialGrid.mini li.vimeo a { background-image: url(../img/icons/vimeo_16.png); }
+ul#socialGrid.mini li.youtube a { background-image: url(../img/icons/youtube_16.png); }
+ul#socialGrid.mini li.brightkite a { background-image: url(../img/icons/brightkite_16.png); }
+ul#socialGrid.mini li.dopplr a { background-image: url(../img/icons/dopplr_16.png); }
+ul#socialGrid.mini li.friendfeed a { background-image: url(../img/icons/friendfeed_16.png); }
+ul#socialGrid.mini li.picasa a { background-image: url(../img/icons/picasa_16.png); }
+ul#socialGrid.mini li.google a { background-image: url(../img/icons/google_16.png); }
+ul#socialGrid.mini li.ember a { background-image: url(../img/icons/ember_16.png); }
+ul#socialGrid.mini li.qik a { background-image: url(../img/icons/qik_16.png); }
+ul#socialGrid.mini li.readernaut a { background-image: url(../img/icons/readernaut_16.png); }
+ul#socialGrid.mini li.reddit a { background-image: url(../img/icons/reddit_16.png); }
+ul#socialGrid.mini li.posterous a { background-image: url(../img/icons/posterous_16.png); }
+ul#socialGrid.mini li.virb a { background-image: url(../img/icons/virb_16.png); }
+ul#socialGrid.mini li.viddler a { background-image: url(../img/icons/viddler_16.png); }
 
 ul#socialGrid li div.tooltip {
     position: absolute;
@@ -73,6 +111,10 @@ ul#socialGrid li div.tooltip {
     display: none;
     z-index: 12000;
 }
+
+    ul#socialGrid.mini li div.tooltip {
+        top: -33px;
+    }
 
     ul#socialGrid li div.tooltip:hover {
         cursor: pointer !important;

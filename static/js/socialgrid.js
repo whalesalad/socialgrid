@@ -8,9 +8,10 @@ jQuery(function(_$) {
             '<span class="center">'+jQuery(this).children('a').text()+'</span>',
             '<span class="right"></span>');
 
-        var tooltip = _$('<div/>').attr('class', 'tooltip').html(tooltipContent.join('')).appendTo(button);
+        var tooltip = _$('<div/>').attr('class', 'tooltip').html(tooltipContent.join('')).appendTo(button),
+            divisor = (_$('#socialGrid').hasClass('mini')) ? 8 : 16;
 
-        tooltip.css('left', -(tooltip.width()/2)+16).bind('click', function(event) {
+        tooltip.css('left', -(tooltip.width()/2)+divisor).bind('click', function(event) {
             window.location = button.children('a').attr('href');
         });
 

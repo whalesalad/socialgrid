@@ -154,7 +154,8 @@ SocialGridAdmin = {
         
         // Add a save button
         sg.reset_footer.append(sg.create_edit_button('green', 'Yes, Reset', function() {
-            // sg.settings_screen.trigger('save_settings');
+            // RESET LOGIC
+            sg.settings_do_reset();
         }));
         
         // Add a cancel button
@@ -164,7 +165,7 @@ SocialGridAdmin = {
             sg.reset_button.fadeIn();
         }));
         
-        sg.switch_screen(sg.settings_screen, sg.reset_screen);
+        sg.switch_screen(sg.reset_screen, sg.settings_screen);
         
     },
     
@@ -521,6 +522,29 @@ SocialGridAdmin = {
             }
         });
     },
+    
+    settings_do_reset: function () {
+        var sg = this;
+        
+        _$.ajax({
+            url: window.ajaxurl,
+            type: 'POST',
+            data: {
+                'action': 'master_socialgrid_reset'
+            },
+            
+            success: function() {
+                window.location = window.location+'&reloaded=true';
+            },
+            
+            error: function() {
+                alert('error');
+            }
+        });
+        
+    },
+    
+    //////////
     
     parse_url: function(url, username) {
         var replacement = /\%s/;
