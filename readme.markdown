@@ -8,7 +8,9 @@ SocialGrid began as a simple addition to my [Tasty Theme](http://whalesalad.com/
 
 ### Updates / Changelog
 
-* **v2.02 (12/22/09)** - Added a TON of new icons (including Posterous) as well as new features like a master reset and the ability to display smaller 16x16 icons rather than the traditional 32x32.
+* **v2.11 (12/28/09)** - Added Technorati to the mix of new icons. It behaves similarly to the RSS icon, in that it doesn't require any input and generates your Technorati profile link automatically.
+* **v2.1 (12/22/09)** - Added a TON of new icons (including Posterous) as well as new features like a master reset and the ability to display smaller 16x16 icons rather than the traditional 32x32.
+* **v2.02 (12/15/09)** - Improved compatibility with many themes with some !important action on the CSS and fixed an issue where services could be added more than once.
 * **v2.01 (12/03/09)** - Fixed a minor issue with the RSS feed url, and css styling.
 * **v2.0  (11/26/09)** - This is the initial release of the SocialGrid plugin!
 
