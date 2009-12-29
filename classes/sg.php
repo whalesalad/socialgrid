@@ -110,6 +110,11 @@ class SG {
             "name" => "Tumblr",
             "text" => "My Tumblr",
             "url" => "%s.tumblr.com"),
+        
+        "technorati" => array(
+            "name" => "Technorati",
+            "text" => "My Technorati Profile",
+            "url" => "technorati.com/blogs/%s"),
 
         "twitter" => array(
             "name" => "Twitter",

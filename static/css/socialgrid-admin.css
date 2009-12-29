@@ -110,21 +110,21 @@
             color: #FFF;
         }
         
-        div.socialgrid-edit-header.delicious { background-image: url(../img/icons/delicious.png); }
-        div.socialgrid-edit-header.deviantart { background-image: url(../img/icons/deviantart.png); }
-        div.socialgrid-edit-header.digg { background-image: url(../img/icons/digg.png); }
-        div.socialgrid-edit-header.facebook { background-image: url(../img/icons/facebook.png); }
-        div.socialgrid-edit-header.flickr { background-image: url(../img/icons/flickr.png); }
-        div.socialgrid-edit-header.lastfm { background-image: url(../img/icons/lastfm.png); }
-        div.socialgrid-edit-header.linkedin { background-image: url(../img/icons/linkedin.png); }
-        div.socialgrid-edit-header.myspace { background-image: url(../img/icons/myspace.png); }
-        div.socialgrid-edit-header.rss { background-image: url(../img/icons/rss.png); }
-        div.socialgrid-edit-header.stumbleupon { background-image: url(../img/icons/stumbleupon.png); }
-        div.socialgrid-edit-header.tumblr { background-image: url(../img/icons/tumblr.png); }
-        div.socialgrid-edit-header.twitpic { background-image: url(../img/icons/twitpic.png); }
-        div.socialgrid-edit-header.twitter { background-image: url(../img/icons/twitter.png); }
-        div.socialgrid-edit-header.vimeo { background-image: url(../img/icons/vimeo.png); }
-        div.socialgrid-edit-header.youtube { background-image: url(../img/icons/youtube.png); }
+        div.socialgrid-edit-header.delicious { background-image: url(../img/icons/delicious_32.png); }
+        div.socialgrid-edit-header.deviantart { background-image: url(../img/icons/deviantart_32.png); }
+        div.socialgrid-edit-header.digg { background-image: url(../img/icons/digg_32.png); }
+        div.socialgrid-edit-header.facebook { background-image: url(../img/icons/facebook_32.png); }
+        div.socialgrid-edit-header.flickr { background-image: url(../img/icons/flickr_32.png); }
+        div.socialgrid-edit-header.lastfm { background-image: url(../img/icons/lastfm_32.png); }
+        div.socialgrid-edit-header.linkedin { background-image: url(../img/icons/linkedin_32.png); }
+        div.socialgrid-edit-header.myspace { background-image: url(../img/icons/myspace_32.png); }
+        div.socialgrid-edit-header.rss { background-image: url(../img/icons/rss_32.png); }
+        div.socialgrid-edit-header.stumbleupon { background-image: url(../img/icons/stumbleupon_32.png); }
+        div.socialgrid-edit-header.tumblr { background-image: url(../img/icons/tumblr_32.png); }
+        div.socialgrid-edit-header.twitter { background-image: url(../img/icons/twitter_32.png); }
+        div.socialgrid-edit-header.vimeo { background-image: url(../img/icons/vimeo_32.png); }
+        div.socialgrid-edit-header.youtube { background-image: url(../img/icons/youtube_32.png); }
+        div.socialgrid-edit-header.technorati { background-image: url(../img/icons/technorati_32.png); }
         
         div.socialgrid-edit-header.brightkite { background-image: url(../img/icons/brightkite_32.png); }
         div.socialgrid-edit-header.dopplr { background-image: url(../img/icons/dopplr_32.png); }
@@ -269,6 +269,7 @@
     ul.socialgrid-items li.posterous { background-image: url(../img/icons/posterous_32.png); }
     ul.socialgrid-items li.virb { background-image: url(../img/icons/virb_32.png); }
     ul.socialgrid-items li.viddler { background-image: url(../img/icons/viddler_32.png); }
+    ul.socialgrid-items li.technorati { background-image: url(../img/icons/technorati_32.png); }
     
     ul.socialgrid-items li.delicious { background-image: url(../img/icons/delicious_32.png); }
     ul.socialgrid-items li.deviantart { background-image: url(../img/icons/deviantart_32.png); }

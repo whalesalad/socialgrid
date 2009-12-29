@@ -230,7 +230,19 @@ SocialGridAdmin = {
                 '</div>');
             
             sg.service_screen.html(sg.service_screen_html.join(''));
+        
+        } else if (slug == 'technorati') {
+            sg.service_screen_html = new Array(
+                '<div class="socialgrid-edit-header '+slug+'">',
+                    '<span class="socialgrid-service-name">'+service['name']+'</span>',
+                    '<span class="socialgrid-service-meta">Your Technorati Profile</span>',
+                '</div>',
+                '<div class="socialgrid-edit-content">',
+                    '<p><strong>This SocialGrid button will link to the Technorati profile for your blog.</strong></p>',
+                    '<p>You don\'t need to enter a username, as the profile link is based on your blog\'s URL, which is filled in automatically.</p>',
+                '</div>');
             
+            sg.service_screen.html(sg.service_screen_html.join(''));
         } else {
             sg.service_screen_html = new Array(
                 '<div class="socialgrid-edit-header '+slug+'">',
@@ -281,13 +293,17 @@ SocialGridAdmin = {
         
         sg.add_screen.hide('slide', { direction: 'left' }, 500);
         sg.service_screen.show('slide', { direction: 'right' }, 500, function() {
-            if (slug != 'rss') sg.service_input.focus();;
+            if (slug != 'rss') return;
+            if (slug != 'technorati') return;
+            sg.service_input.focus();
         });
         
         // Create the binding for submission
         sg.service_screen.bind('add_service', function(event) {
             if (slug == 'rss') {
                 username = 'rss';
+            } else if (slug == 'technorati') {
+                username = 'technorati';
             } else {
                 username = sg.service_input.val();
             }
@@ -319,6 +335,29 @@ SocialGridAdmin = {
                 '<div class="socialgrid-edit-content">',
                     '<p><strong>This SocialGrid button will link to the RSS feed that WordPress automatically creates for you.</strong></p>',
                     '<p>If you would like to customize your RSS feed (ex, Feedburner), there are plugins available to do that.</p>',
+                '</div>');
+            
+            sg.service_screen.html(sg.service_screen_html.join(''));
+            
+            // Create the footer for the buttons
+            sg.service_footer_container = _$('<div/>').addClass('socialgrid-footer-container').appendTo(sg.service_screen);
+            sg.service_footer = _$('<ul/>').addClass('socialgrid-footer').appendTo(sg.service_footer_container);
+            
+            // Add a cancel button
+            sg.service_footer.append(sg.create_edit_button('red', 'Back', function() {
+                sg.return_to_home();
+            }));
+        
+        } else if (slug == 'technorati') {
+            
+            sg.service_screen_html = new Array(
+                '<div class="socialgrid-edit-header '+slug+'">',
+                    '<span class="socialgrid-service-name">'+service['name']+'</span>',
+                    '<span class="socialgrid-service-meta">Your Technorati Profile</span>',
+                '</div>',
+                '<div class="socialgrid-edit-content">',
+                    '<p><strong>This SocialGrid button will link to the Technorati profile for your blog.</strong></p>',
+                    '<p>You don\'t need to enter a username, as the profile link is based on your blog\'s URL, which is filled in automatically.</p>',
                 '</div>');
             
             sg.service_screen.html(sg.service_screen_html.join(''));
@@ -379,7 +418,9 @@ SocialGridAdmin = {
         // sg.home_screen.hide('slide', { direction: 'left' }, 500);
         sg.hide_homescreen();
         sg.service_screen.show('slide', { direction: 'right' }, 500, function() {
-            if (slug != 'rss') sg.service_input.focus();
+            if (slug != 'rss') return;
+            if (slug != 'technorati') return;
+            sg.service_input.focus();
         });
         
         // Create the binding for submission
