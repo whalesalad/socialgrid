@@ -19,24 +19,34 @@ define('SG_SLUG', 'socialgrid');
 define('SG_CLASS_LIB', dirname(__FILE__).'/classes');
 define('SG_STATIC', WP_PLUGIN_URL.'/'.basename(dirname(__FILE__)).'/static');
 
-// Load various classes...
-require_once(SG_CLASS_LIB.'/service.php');
-require_once(SG_CLASS_LIB.'/settings.php');
-require_once(SG_CLASS_LIB.'/sg.php');
+// IF WE'RE DEALIN WITH PHP5
+if (is_php5()) {
+    // Load various classes...
+    require_once(SG_CLASS_LIB.'/service.php');
+    require_once(SG_CLASS_LIB.'/settings.php');
+    require_once(SG_CLASS_LIB.'/sg.php');
 
-// Jump on various WP Admin hooks
-add_action('admin_menu', SG_SLUG.'_add_options_page');
-add_action('admin_post_'.SG_SLUG.'_save', SG_SLUG.'_save_options');
-add_action('init', SG_SLUG.'_settings_init');
-add_action('admin_head', SG_SLUG.'_settings_head');
+    // Jump on various WP Admin hooks
+    add_action('admin_menu', SG_SLUG.'_add_options_page');
+    add_action('admin_post_'.SG_SLUG.'_save', SG_SLUG.'_save_options');
+    add_action('init', SG_SLUG.'_settings_init');
+    add_action('admin_head', SG_SLUG.'_settings_head');
 
-// Create the various AJAX actions, see functions at end of file.
-add_action('wp_ajax_add_socialgrid_service', 'socialgrid_add_service_rpc');
-add_action('wp_ajax_update_socialgrid_service', 'socialgrid_update_service_rpc');
-add_action('wp_ajax_remove_socialgrid_service', 'socialgrid_remove_service_rpc');
-add_action('wp_ajax_rearrange_socialgrid_services', 'socialgrid_rearrange_rpc');
-add_action('wp_ajax_toggle_socialgrid_icon_size', 'socialgrid_toggle_icon_size_rpc');
-add_action('wp_ajax_master_socialgrid_reset', 'socialgrid_master_reset_rpc');
+    // Create the various AJAX actions, see functions at end of file.
+    add_action('wp_ajax_add_socialgrid_service', 'socialgrid_add_service_rpc');
+    add_action('wp_ajax_update_socialgrid_service', 'socialgrid_update_service_rpc');
+    add_action('wp_ajax_remove_socialgrid_service', 'socialgrid_remove_service_rpc');
+    add_action('wp_ajax_rearrange_socialgrid_services', 'socialgrid_rearrange_rpc');
+    add_action('wp_ajax_toggle_socialgrid_icon_size', 'socialgrid_toggle_icon_size_rpc');
+    add_action('wp_ajax_master_socialgrid_reset', 'socialgrid_master_reset_rpc');
+    
+    $sg_settings = new SocialGridSettings();
+    $sg_admin = new SGAdmin($sg_settings);
+    
+} else {
+    add_action('admin_menu', SG_SLUG.'_add_options_page');
+    add_action('init', SG_SLUG.'_settings_init');
+}
 
 function socialgrid_add_options_page() {
     add_theme_page(__(SG_NAME.' Options', SG_SLUG), __(SG_NAME.' Options', SG_SLUG), 'edit_themes', SG_SLUG.'-options', SG_SLUG.'_options_admin');
@@ -54,9 +64,6 @@ function socialgrid_settings_init() {
     }
 }
 
-$sg_settings = new SocialGridSettings();
-$sg_admin = new SGAdmin($sg_settings);
-
 function socialgrid_settings_head() { 
     global $sg_admin; ?>
     <script type="text/javascript">
@@ -73,6 +80,7 @@ function socialgrid_settings_head() {
 function socialgrid_options_admin() { 
     global $sg_admin, $sg_settings; ?>
     
+    <?php if (is_php5()): // IF PHP5, DO AS NORMAL ?>
     <?php if ($_GET['reloaded']): ?>
     <div id="updated" class="updated fade">
         <p><?php echo __('SocialGrid has been reset successfully!', 'socialgrid'); ?></p>
@@ -110,6 +118,29 @@ function socialgrid_options_admin() {
         
     <p>If you like what you see here, <a href="http://whalesalad.com/tasty" target="_blank">check out Tasty</a>, a WordPress theme also created by Michael Whalen.</p>
     <p><small>The icons used in SocialGrid were created by <a target="_blank" href="http://www.komodomedia.com/blog/2009/06/social-network-icon-pack/">Rogie King of Komodo Media</a>.</small></p>
+    
+    <?php else: // IF PHP4, OR SOMETHING LESS THAN 5. PHP3? LULZ. 
+    
+    $pretty_php_version = explode('.', phpversion());
+    $pretty_php_version = $pretty_php_version[0].'.'.$pretty_php_version[1];
+    
+    ?>
+
+    <h2>Sorry, SocialGrid will not work on this server.</h2>
+
+    <div id="updated" class="updated fade">
+    <p><strong>Currently your web server is running PHP <?php echo $pretty_php_version.' ('.phpversion().')'; ?> and it needs to be running at least version 5.2.</strong></p>
+    </div>
+
+    <p>SocialGrid was built for PHP5, which is a newer but stable and mature version of PHP. <br/> PHP5 has been around for a couple of years now, so there is no reason why your web server should be running PHP4.</p>
+    
+    <p><strong>There's good news, however,</strong> most webhosts let you choose the version of PHP that you would like to run on your site. <br/>Try looking around your hosting control panel or search google for something like "how to enable php5 on XYZ host".</p>
+    
+    <p><em>Sorry for the inconvenience,</em><br/>&nbsp;&nbsp;&nbsp;&nbsp;<cite>&mdash; Michael</cite></p>
+    
+    <p><small>P.S. If you have any questions, comments, or concerns please feel free to <a href="http://whalesalad.com/contact" target="_blank">contact me via my contact form</a>.</small></p>
+    
+    <?php endif; ?>
 <?php } 
 
 
@@ -226,7 +257,18 @@ class SocialGridWidget extends WP_Widget {
     }
 }
 
-// Hook the widget into WP
-add_action('widgets_init', create_function('', 'return register_widget("SocialGridWidget");'));
+if (is_php5()) {
+    // Hook the widget into WP
+    add_action('widgets_init', create_function('', 'return register_widget("SocialGridWidget");'));
+}
+
+////////////////////
+// CHECK FOR PHP5 //
+////////////////////
+function is_php5() {
+    $phpversion = explode('.', PHP_VERSION);
+    return ($phpversion[0] < 5) ? false : true;
+    // return false; // debug
+}
 
 ?>
