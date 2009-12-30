@@ -186,8 +186,12 @@
             }
             
             div.socialgrid-settings-pane .field {
-                padding-top: 5px;
+                padding: 3px 0 7px 0;
             }
+            
+                div.socialgrid-settings-pane .field p {
+                    margin-bottom: 5px;
+                }
         
         div.socialgrid-footer-container {
             clear: both;

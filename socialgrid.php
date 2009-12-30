@@ -39,6 +39,7 @@ if (is_php5()) {
     add_action('wp_ajax_rearrange_socialgrid_services', 'socialgrid_rearrange_rpc');
     add_action('wp_ajax_toggle_socialgrid_icon_size', 'socialgrid_toggle_icon_size_rpc');
     add_action('wp_ajax_master_socialgrid_reset', 'socialgrid_master_reset_rpc');
+    add_action('wp_ajax_save_socialgrid_settings', 'socialgrid_savesettings_rpc');
     
     $sg_settings = new SocialGridSettings();
     $sg_admin = new SGAdmin($sg_settings);
@@ -53,14 +54,17 @@ function socialgrid_add_options_page() {
 }
 
 function socialgrid_settings_init() {
+    global $sg_settings;
     if (is_admin()) {
         wp_enqueue_style(SG_SLUG.'-admin-stylesheet',  SG_STATIC.'/css/'.SG_SLUG.'-admin.css');
         wp_enqueue_script(SG_SLUG.'-admin-js', SG_STATIC.'/js/'.SG_SLUG.'-admin.js');
         wp_enqueue_script(SG_SLUG.'-admin-jquery-ui', SG_STATIC.'/js/jquery-ui-1.7.2.custom.min.js');
     } else {
-        wp_enqueue_script('jquery');
+        if (!$sg_settings->disable_tooltips) {
+            wp_enqueue_script('jquery');
+            wp_enqueue_script(SG_SLUG.'-js', SG_STATIC.'/js/'.SG_SLUG.'.js');
+        }
         wp_enqueue_style(SG_SLUG.'-stylesheet',  SG_STATIC.'/css/'.SG_SLUG.'.css');
-        wp_enqueue_script(SG_SLUG.'-js', SG_STATIC.'/js/'.SG_SLUG.'.js');
     }
 }
 
@@ -69,7 +73,8 @@ function socialgrid_settings_head() {
     <script type="text/javascript">
         SG_DEFAULTS = <?php echo json_encode($sg_admin->default_services); ?>;
         SG_SERVICES = <?php echo json_encode($sg_admin->inline_service_list()); ?>;
-        SG_MINI_ICONS = <?php echo json_encode($sg_admin->settings->enable_small_icons); ?>;
+        SG_MINI_ICONS = <?php echo json_encode($sg_admin->settings->enable_mini_icons); ?>;
+        SG_DISABLE_TOOLTIPS = <?php echo json_encode($sg_admin->settings->disable_tooltips); ?>;
         jQuery(document).ready(function() {
             SocialGridAdmin.init();
         });
@@ -220,15 +225,21 @@ function socialgrid_remove_service_rpc() {
     $sg_settings->save();
 }
 
-function socialgrid_toggle_icon_size_rpc() {
+function socialgrid_savesettings_rpc() {
     global $sg_settings;
     
-    $size = $_POST['size'];
+    $icon_size = $_POST['icon_size'];
+    if ($icon_size == 'mini') {
+        $sg_settings->enable_mini_icons = true;
+    } else {
+        $sg_settings->enable_mini_icons = false;
+    }
     
-    if ($size == 'mini') {
-        $sg_settings->enable_small_icons = true;
-    } else if ($size == 'standard') {
-        $sg_settings->enable_small_icons = false;
+    $disable_tooltips = $_POST['tooltips'];
+    if ($disable_tooltips == 'disabled') {
+        $sg_settings->disable_tooltips = true;
+    } else {
+        $sg_settings->disable_tooltips = false;
     }
     
     $sg_settings->save();

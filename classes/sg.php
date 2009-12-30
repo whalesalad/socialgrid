@@ -156,7 +156,7 @@ class SG {
         $services = $this->services;
 
         if ($services) {
-            $size = ($this->settings->enable_small_icons) ? "mini" : "standard";
+            $size = ($this->settings->enable_mini_icons) ? "mini" : "standard";
             
             echo '<ul id="socialGrid" class="'.$size.'">';
             

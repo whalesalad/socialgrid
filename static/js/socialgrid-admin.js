@@ -8,8 +8,6 @@ SocialGridAdmin = {
         this.dropzone = _$('#socialgrid-drop-delete');
         this.settings_button = _$('#socialgrid-settings-button');
 
-        this.mini_icons_enabled = SG_MINI_ICONS;
-        
         this.items = _$('.socialgrid-items');
         
         sg.items.sortable({
@@ -77,14 +75,21 @@ SocialGridAdmin = {
                 '<p>You can use 16px \'mini\' icons instead of the large 32px icons. This setting is reflected on your website, not in the SocialGrid admin.</p>',
                 '<input type="checkbox" name="sg-mini-icons" id="sg-mini-icons" />',
                 '<label for="sg-mini-icons">Enable Mini Icons</label>',
+            '</div>',
+            '<div class="field">',
+                '<p>Some like to let their icons to do all the talking, and don\'t need no stinkin\' tooltips.</p>',
+                '<input type="checkbox" name="sg-disable-tooltips" id="sg-disable-tooltips" />',
+                '<label for="sg-disable-tooltips">Disable Tooltips Completely</label>',
             '</div>'
         ];
         
         sg.settings_screen.html(settings_html.join(""));
         
-        if (sg.mini_icons_enabled) {
+        if (SG_MINI_ICONS)
             _$('#sg-mini-icons').attr('checked', 'checked');
-        }
+        
+        if (SG_DISABLE_TOOLTIPS)
+            _$('#sg-disable-tooltips').attr('checked', 'checked');
         
         sg.reset_button = sg.create_button('Reset', function() {
             // will reset all of SG
@@ -114,12 +119,15 @@ SocialGridAdmin = {
         sg.settings_screen.show('slide', { direction: 'right' }, 500);
         
         sg.settings_screen.bind('save_settings', function(event) {
-            checkbox = _$('#sg-mini-icons');
-            if (checkbox.attr('checked')) {
-                sg.save_icon_size('mini')
-            } else {
-                sg.save_icon_size('standard')
-            };
+            var icon_checkbox = _$('#sg-mini-icons'),
+                tooltip_checkbox = _$('#sg-disable-tooltips');
+
+            sg.settings = {
+                icon_size: (icon_checkbox.attr('checked')) ? 'mini' : 'standard',
+                tooltips: (tooltip_checkbox.attr('checked')) ? 'disabled' : 'enabled'
+            }
+            
+            sg.save_settings(sg.settings);
             
             sg.reset_button.fadeOut('fast', function(){
                 sg.reset_button.remove();
@@ -539,23 +547,27 @@ SocialGridAdmin = {
     },
     
     // Save Icon Size
-    save_icon_size: function(size) {
+    save_settings: function() {
         var sg = this;
         
+        /*
+        sg.settings = {
+            icon_size: (icon_checkbox.attr('checked')) ? 'mini' : 'standard',
+            tooltips: (tooltip_checkbox.attr('checked')) ? 'disabled' : 'enabled'
+        }
+        */
         _$.ajax({
             url: window.ajaxurl,
             type: 'POST',
             data: {
-                'action': 'toggle_socialgrid_icon_size',
-                'size': size,
+                'action': 'save_socialgrid_settings',
+                'icon_size': sg.settings.icon_size,
+                'tooltips': sg.settings.tooltips
             },
             
-            success: function() {
-                if (size == 'standard') {
-                    sg.mini_icons_enabled = false;
-                } else {
-                    sg.mini_icons_enabled = true;
-                }
+            success: function(response) {
+                window.SG_MINI_ICONS = (sg.settings.icon_size == 'mini') ? true : false;
+                window.SG_DISABLE_TOOLTIPS = (sg.settings.tooltips == 'disabled') ? true : false;
             },
             
             error: function() {
