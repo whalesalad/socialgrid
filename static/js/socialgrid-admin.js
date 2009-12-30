@@ -550,12 +550,6 @@ SocialGridAdmin = {
     save_settings: function() {
         var sg = this;
         
-        /*
-        sg.settings = {
-            icon_size: (icon_checkbox.attr('checked')) ? 'mini' : 'standard',
-            tooltips: (tooltip_checkbox.attr('checked')) ? 'disabled' : 'enabled'
-        }
-        */
         _$.ajax({
             url: window.ajaxurl,
             type: 'POST',
