@@ -185,8 +185,8 @@ SocialGridAdmin = {
         // For each of the disabled items, loop and create a new choosable item
         for (service in SG_SERVICES) {
             if (!SG_SERVICES[service]) {
-                skeleton = SG_DEFAULTS[service];
-                item = _$('<li/>')
+                var skeleton = SG_DEFAULTS[service];
+                var item = _$('<li/>')
                     .text(skeleton['name'])
                     .addClass(service)
                     .addClass('socialgrid-item')
