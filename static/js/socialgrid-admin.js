@@ -11,7 +11,7 @@ SocialGridAdmin = {
         this.items = _$('.socialgrid-items');
         
         sg.items.sortable({
-            opacity: .5,
+            opacity: 0.5,
             containment: sg.home_screen,
             items: '.socialgrid-item',
             start: function() {
@@ -125,7 +125,7 @@ SocialGridAdmin = {
             sg.settings = {
                 icon_size: (icon_checkbox.attr('checked')) ? 'mini' : 'standard',
                 tooltips: (tooltip_checkbox.attr('checked')) ? 'disabled' : 'enabled'
-            }
+            };
             
             sg.save_settings(sg.settings);
             
@@ -151,7 +151,7 @@ SocialGridAdmin = {
         reset_html = [
             '<h3>Reset SocialGrid</h3>',
             '<p>If you are having problems with SG or would simply like to start fresh, you can reset your settings.</p>',
-            '<p>Keep in mind, resetting SocialGrid will remove all of your icons from your website and give you a fresh clean slate to work with.</p>',
+            '<p>Keep in mind, resetting SocialGrid will remove all of your icons from your website and give you a fresh clean slate to work with.</p>'
         ];
         
         sg.reset_screen.html(reset_html.join(""));
@@ -532,7 +532,7 @@ SocialGridAdmin = {
             type: 'POST',
             data: {
                 'action': 'remove_socialgrid_service',
-                'service': service_name,
+                'service': service_name
             },
 
             success: function() {
