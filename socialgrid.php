@@ -8,23 +8,21 @@ Author: Michael Whalen
 Author URI: http://whalesalad.com
 */
 
-define('WP_DEBUG', true);
-
 // Define global SocialGrid constants
 define('SG_VERSION', 2.3);
 define('SG_NAME', 'SocialGrid');
 define('SG_SLUG', 'socialgrid');
 
 // Define path to SocialGrid libs and direct url to SocialGrid static assets
-define('SG_CLASS_LIB', dirname(__FILE__).'/classes');
+define('SG_CLASS_LIB', dirname(__FILE__).'/classes/');
 define('SG_STATIC', WP_PLUGIN_URL.'/'.basename(dirname(__FILE__)).'/static');
 
 // IF WE'RE DEALIN WITH PHP5
 if (is_php5()) {
     // Load various classes...
-    require_once(SG_CLASS_LIB.'/service.php');
-    require_once(SG_CLASS_LIB.'/settings.php');
-    require_once(SG_CLASS_LIB.'/sg.php');
+    foreach (glob(SG_CLASS_LIB.'*.class.php') as $filename) {
+        require_once $filename;
+    }
 
     // Jump on various WP Admin hooks
     add_action('admin_menu', SG_SLUG.'_add_options_page');
@@ -86,7 +84,7 @@ function socialgrid_options_admin() {
     global $sg_admin, $sg_settings; ?>
     
     <?php if (is_php5()): // IF PHP5, DO AS NORMAL ?>
-    <?php if ($_GET['reloaded']): ?>
+    <?php if (isset($_GET['reloaded'])): ?>
     <div id="updated" class="updated fade">
         <p><?php echo __('SocialGrid has been reset successfully!', 'socialgrid'); ?></p>
     </div>

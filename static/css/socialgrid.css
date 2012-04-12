@@ -1,4 +1,4 @@
-ul#socialGrid {
+/*ul#socialGrid {
     margin: 0 0 0 -7px !important;
 }
 
@@ -64,7 +64,7 @@ ul#socialGrid li.vimeo a { background-image: url(../img/icons/vimeo_32.png); }
 ul#socialGrid li.youtube a { background-image: url(../img/icons/youtube_32.png); }
 ul#socialGrid li.brightkite a { background-image: url(../img/icons/brightkite_32.png); }
 ul#socialGrid li.dopplr a { background-image: url(../img/icons/dopplr_32.png); }
-ul#socialGrid li.friendfeed a { background-image: url(../img/icons/friendfeed_32.png); }
+ul#socialGrid li.dribbble a { background-image: url(../img/icons/dribbble_32.png); }
 ul#socialGrid li.picasa a { background-image: url(../img/icons/picasa_32.png); }
 ul#socialGrid li.google a { background-image: url(../img/icons/google_32.png); }
 ul#socialGrid li.ember a { background-image: url(../img/icons/ember_32.png); }
@@ -151,3 +151,4 @@ ul#socialGrid li div.tooltip {
         background: url(../img/tooltipRight.png) top right no-repeat;
         right: -6px;
     }
+*/

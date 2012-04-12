@@ -6,20 +6,15 @@
 
 class SG {
     public $default_services = array(
-        "brightkite" => array(
-            "name" => "Brightkite",
-            "text" => "My Brightkite Profile",
-            "url" => "brightkite.com/people/%s"),
-
         "dopplr" => array(
             "name" => "Dopplr",
             "text" => "My Dopplr Trips",
             "url" => "www.dopplr.com/traveller/%s"),
         
-        "friendfeed" => array(
-            "name" => "Friendfeed",
-            "text" => "My Friendfeed Profile",
-            "url" => "friendfeed.com/%s"),
+        "dribbble" => array(
+            "name" => "Dribbble",
+            "text" => "My Dribbble Shots",
+            "url" => "dribbble.com/%s"),
         
         "picasa" => array(
             "name" => "Picasa Web",
@@ -27,9 +22,9 @@ class SG {
             "url" => "picasaweb.google.com/%s"),
             
         "google" => array(
-            "name" => "Google Profile",
-            "text" => "My Google Profile",
-            "url" => "www.google.com/profiles/%s"),
+            "name" => "Google+",
+            "text" => "My Google+ Profile",
+            "url" => "plus.google.com/%s"),
         
         "ember" => array(
             "name" => "Ember",
@@ -158,7 +153,7 @@ class SG {
         if ($services) {
             $size = ($this->settings->enable_mini_icons) ? "mini" : "standard";
             
-            echo '<ul id="socialGrid" class="'.$size.'">';
+            echo '<li><ul id="socialGrid" class="'.$size.'">';
             
             $grid_items = array();
             
@@ -173,7 +168,7 @@ class SG {
             // Spit 'em out
             echo join($grid_items, "\n");
             
-            echo '</ul>';
+            echo '</ul></li>';
         } else {
             return false;
         }
