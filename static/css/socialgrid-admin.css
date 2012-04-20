@@ -125,8 +125,9 @@
         div.socialgrid-edit-header.vimeo { background-image: url(../img/icons/vimeo_32.png); }
         div.socialgrid-edit-header.youtube { background-image: url(../img/icons/youtube_32.png); }
         div.socialgrid-edit-header.technorati { background-image: url(../img/icons/technorati_32.png); }
+        div.socialgrid-edit-header.cargo { background-image: url(../img/icons/cargo_32.png); }
+        div.socialgrid-edit-header.forrst { background-image: url(../img/icons/forrst_32.png); }
         
-        div.socialgrid-edit-header.brightkite { background-image: url(../img/icons/brightkite_32.png); }
         div.socialgrid-edit-header.dopplr { background-image: url(../img/icons/dopplr_32.png); }
         div.socialgrid-edit-header.dribbble { background-image: url(../img/icons/dribbble_32.png); }
         div.socialgrid-edit-header.picasa { background-image: url(../img/icons/picasa_32.png); }
@@ -261,7 +262,8 @@
         z-index: 3000;
     }
     
-    ul.socialgrid-items li.brightkite { background-image: url(../img/icons/brightkite_32.png); }
+    ul.socialgrid-items li.cargo { background-image: url(../img/icons/cargo_32.png); }
+    ul.socialgrid-items li.forrst { background-image: url(../img/icons/forrst_32.png); }
     ul.socialgrid-items li.dopplr { background-image: url(../img/icons/dopplr_32.png); }
     ul.socialgrid-items li.dribbble { background-image: url(../img/icons/dribbble_32.png); }
     ul.socialgrid-items li.picasa { background-image: url(../img/icons/picasa_32.png); }

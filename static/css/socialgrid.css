@@ -62,7 +62,8 @@ ul#socialGrid li.technorati a { background-image: url(../img/icons/technorati_32
 ul#socialGrid li.twitter a { background-image: url(../img/icons/twitter_32.png); }
 ul#socialGrid li.vimeo a { background-image: url(../img/icons/vimeo_32.png); }
 ul#socialGrid li.youtube a { background-image: url(../img/icons/youtube_32.png); }
-ul#socialGrid li.brightkite a { background-image: url(../img/icons/brightkite_32.png); }
+ul#socialGrid li.cargo a { background-image: url(../img/icons/cargo_32.png); }
+ul#socialGrid li.forrst a { background-image: url(../img/icons/forrst_32.png); }
 ul#socialGrid li.dopplr a { background-image: url(../img/icons/dopplr_32.png); }
 ul#socialGrid li.dribbble a { background-image: url(../img/icons/dribbble_32.png); }
 ul#socialGrid li.picasa a { background-image: url(../img/icons/picasa_32.png); }
@@ -77,6 +78,7 @@ ul#socialGrid li.viddler a { background-image: url(../img/icons/viddler_32.png);
 
 ul#socialGrid.mini li.delicious a { background-image: url(../img/icons/delicious_16.png); }
 ul#socialGrid.mini li.deviantart a { background-image: url(../img/icons/deviantart_16.png); }
+ul#socialGrid.mini li.dribbble a { background-image: url(../img/icons/dribbble_16.png); }
 ul#socialGrid.mini li.digg a { background-image: url(../img/icons/digg_16.png); }
 ul#socialGrid.mini li.facebook a { background-image: url(../img/icons/facebook_16.png); }
 ul#socialGrid.mini li.flickr a { background-image: url(../img/icons/flickr_16.png); }
@@ -90,7 +92,8 @@ ul#socialGrid.mini li.technorati a { background-image: url(../img/icons/technora
 ul#socialGrid.mini li.twitter a { background-image: url(../img/icons/twitter_16.png); }
 ul#socialGrid.mini li.vimeo a { background-image: url(../img/icons/vimeo_16.png); }
 ul#socialGrid.mini li.youtube a { background-image: url(../img/icons/youtube_16.png); }
-ul#socialGrid.mini li.brightkite a { background-image: url(../img/icons/brightkite_16.png); }
+ul#socialGrid.mini li.cargo a { background-image: url(../img/icons/cargo_16.png); }
+ul#socialGrid.mini li.forrst a { background-image: url(../img/icons/forrst_16.png); }
 ul#socialGrid.mini li.dopplr a { background-image: url(../img/icons/dopplr_16.png); }
 ul#socialGrid.mini li.friendfeed a { background-image: url(../img/icons/friendfeed_16.png); }
 ul#socialGrid.mini li.picasa a { background-image: url(../img/icons/picasa_16.png); }

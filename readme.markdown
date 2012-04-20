@@ -8,7 +8,8 @@ SocialGrid began as a simple addition to my [Tasty Theme](http://whalesalad.com/
 
 ### Updates / Changelog
 
-* **v2.3 (12/30/09)** -  Added a feature to disable tooltips completely.
+* **v2.4 (4/19/12)** - Removed Brightkite and Friendfeed, added Cargo Collective, Dribble and Forrst. Replaced Google Profile with Google+. The text for each item can now be changed in classes/sg.php.
+* **v2.3 (12/30/09)** - Added a feature to disable tooltips completely.
 * **v2.2 (12/29/09)** - Implemented a simple check to ensure that PHP4 users are notified that their servers are out of date, with instructions on how to switch to PHP5.
 * **v2.11 (12/28/09)** - Added Technorati to the mix of new icons. It behaves similarly to the RSS icon, in that it doesn't require any input and generates your Technorati profile link automatically.
 * **v2.1 (12/22/09)** - Added a TON of new icons (including Posterous) as well as new features like a master reset and the ability to display smaller 16x16 icons rather than the traditional 32x32.

@@ -1,6 +1,7 @@
 jQuery(function(_$) {
     _$('#socialGrid li').each(function(index) {
-        var button = _$(this);
+        var button = _$(this),
+            FADE_SPEED = 150;
 
         // Create a tooltip for each button
         var tooltipContent = new Array(
@@ -17,9 +18,9 @@ jQuery(function(_$) {
 
         button.hover(function() {
             tooltip.siblings().stop();
-            tooltip.fadeIn('fast');
+            tooltip.fadeIn(FADE_SPEED);
         }, function() {
-            tooltip.fadeOut('fast');
+            tooltip.fadeOut(FADE_SPEED);
         });
     });
 });

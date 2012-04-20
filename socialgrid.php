@@ -26,9 +26,13 @@ if (is_php5()) {
 
     // Jump on various WP Admin hooks
     add_action('admin_menu', SG_SLUG.'_add_options_page');
-    add_action('admin_post_'.SG_SLUG.'_save', SG_SLUG.'_save_options');
-    add_action('init', SG_SLUG.'_settings_init');
-    add_action('admin_head', SG_SLUG.'_settings_head');
+
+    if (isset($_GET['page']) and $_GET['page'] == 'socialgrid-options') {
+        add_action('admin_post_'.SG_SLUG.'_save', SG_SLUG.'_save_options');
+        add_action('init', SG_SLUG.'_settings_init');
+        add_action('admin_head', SG_SLUG.'_settings_head');
+    }
+    add_action('init', SG_SLUG.'_frontend_init');
 
     // Create the various AJAX actions, see functions at end of file.
     add_action('wp_ajax_add_socialgrid_service', 'socialgrid_add_service_rpc');
@@ -53,26 +57,29 @@ function socialgrid_add_options_page() {
 
 function socialgrid_settings_init() {
     global $sg_settings;
-    if (is_admin()) {
+    if (is_admin() and isset($_GET['page']) and $_GET['page'] == 'socialgrid-options') {
         wp_enqueue_style(SG_SLUG.'-admin-stylesheet',  SG_STATIC.'/css/'.SG_SLUG.'-admin.css');
         wp_enqueue_script(SG_SLUG.'-admin-js', SG_STATIC.'/js/'.SG_SLUG.'-admin.js');
         wp_enqueue_script(SG_SLUG.'-admin-jquery-ui', SG_STATIC.'/js/jquery-ui-1.7.2.custom.min.js');
-    } else {
-        if (!$sg_settings->disable_tooltips) {
-            wp_enqueue_script('jquery');
-            wp_enqueue_script(SG_SLUG.'-js', SG_STATIC.'/js/'.SG_SLUG.'.js');
-        }
-        wp_enqueue_style(SG_SLUG.'-stylesheet',  SG_STATIC.'/css/'.SG_SLUG.'.css');
     }
+}
+
+function socialgrid_frontend_init() {
+    global $sg_settings;
+    if (!$sg_settings->disable_tooltips) {
+        wp_enqueue_script('jquery');
+        wp_enqueue_script(SG_SLUG.'-js', SG_STATIC.'/js/'.SG_SLUG.'.js');
+    }
+    wp_enqueue_style(SG_SLUG.'-stylesheet',  SG_STATIC.'/css/'.SG_SLUG.'.css');
 }
 
 function socialgrid_settings_head() { 
     global $sg_admin; ?>
     <script type="text/javascript">
-        SG_DEFAULTS = <?php echo json_encode($sg_admin->default_services); ?>;
-        SG_SERVICES = <?php echo json_encode($sg_admin->inline_service_list()); ?>;
-        SG_MINI_ICONS = <?php echo json_encode($sg_admin->settings->enable_mini_icons); ?>;
-        SG_DISABLE_TOOLTIPS = <?php echo json_encode($sg_admin->settings->disable_tooltips); ?>;
+        SG_DEFAULTS = <?= json_encode($sg_admin->default_services); ?>;
+        SG_SERVICES = <?= json_encode($sg_admin->inline_service_list()); ?>;
+        SG_MINI_ICONS = <?= json_encode($sg_admin->settings->enable_mini_icons); ?>;
+        SG_DISABLE_TOOLTIPS = <?= json_encode($sg_admin->settings->disable_tooltips); ?>;
         jQuery(document).ready(function() {
             SocialGridAdmin.init();
         });

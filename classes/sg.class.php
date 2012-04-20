@@ -6,54 +6,59 @@
 
 class SG {
     public $default_services = array(
+        "cargo" => array(
+            "name" => "Cargo Collective",
+            "text" => "Cargo Collective",
+            "url" => "cargocollective.com/%s"),
+
         "dopplr" => array(
             "name" => "Dopplr",
-            "text" => "My Dopplr Trips",
+            "text" => "Dopplr Trips",
             "url" => "www.dopplr.com/traveller/%s"),
         
         "dribbble" => array(
             "name" => "Dribbble",
-            "text" => "My Dribbble Shots",
+            "text" => "Dribbble Shots",
             "url" => "dribbble.com/%s"),
         
         "picasa" => array(
             "name" => "Picasa Web",
-            "text" => "My Picasa Web Albums",
+            "text" => "Picasa Web Albums",
             "url" => "picasaweb.google.com/%s"),
             
         "google" => array(
             "name" => "Google+",
-            "text" => "My Google+ Profile",
+            "text" => "Google+ Profile",
             "url" => "plus.google.com/%s"),
         
         "ember" => array(
             "name" => "Ember",
-            "text" => "My Ember Images",
+            "text" => "Ember Images",
             "url" => "emberapp.com/%s"),
             
         "qik" => array(
             "name" => "Qik",
-            "text" => "My Qik Videos",
+            "text" => "Qik Videos",
             "url" => "qik.com/%s"),
         
         "readernaut" => array(
             "name" => "Readernaut",
-            "text" => "My Books on Readernaut",
+            "text" => "Books on Readernaut",
             "url" => "readernaut.com/%s"),
         
         "reddit" => array(
             "name" => "Reddit",
-            "text" => "My Reddit Profile",
+            "text" => "Reddit Profile",
             "url" => "www.reddit.com/user/%s"),
         
         "delicious" => array(
             "name" => "Delicious",
-            "text" => "My Delicious Bookmarks",
+            "text" => "Delicious Bookmarks",
             "url" => "delicious.com/%s"),
 
         "deviantart" => array(
             "name" => "deviantART",
-            "text" => "My deviantART Profile",
+            "text" => "deviantART Profile",
             "url" => "%s.deviantart.com"),
 
         "digg" => array(
@@ -63,77 +68,82 @@ class SG {
 
         "facebook" => array(
             "name" => "Facebook",
-            "text" => "My Facebook Profile",
+            "text" => "Facebook Profile",
             "url" => "facebook.com/%s"),
 
         "flickr" => array(
             "name" => "Flickr",
-            "text" => "My Flickr Photos",
+            "text" => "Flickr Photos",
             "url" => "flickr.com/photos/%s"),
+
+        "forrst" => array(
+            "name" => "Forrst",
+            "text" => "Forrst Profile",
+            "url" => "http://forrst.com/people/%s"),
 
         "lastfm" => array(
             "name" => "Last.fm",
-            "text" => "My Last.fm Scrobbles",
+            "text" => "Last.fm Scrobbles",
             "url" => "last.fm/user/%s"),
 
         "linkedin" => array(
             "name" => "LinkedIn",
-            "text" => "My LinkedIn Profile",
+            "text" => "LinkedIn Profile",
             "url" => "www.linkedin.com/in/%s"),
 
         "myspace" => array(
             "name" => "MySpace",
-            "text" => "My MySpace Profile",
+            "text" => "MySpace Profile",
             "url" => "myspace.com/%s"),
 
         "posterous" => array(
             "name" => "Posterous",
-            "text" => "My Posterous",
+            "text" => "Posterous",
             "url" => "%s.posterous.com"),
 
         "rss" => array(
             "name" => "RSS",
-            "text" => "My RSS Feed",
+            "text" => "RSS Feed",
             "url" => "%s"),
 
         "stumbleupon" => array(
             "name" => "StumbleUpon",
-            "text" => "My StumbleUpon Profile",
+            "text" => "StumbleUpon Profile",
             "url" => "www.stumbleupon.com/stumbler/%s"),
 
         "tumblr" => array(
             "name" => "Tumblr",
-            "text" => "My Tumblr",
+            "text" => "Tumblr",
             "url" => "%s.tumblr.com"),
         
         "technorati" => array(
             "name" => "Technorati",
-            "text" => "My Technorati Profile",
+            "text" => "Technorati Profile",
             "url" => "technorati.com/blogs/%s"),
 
         "twitter" => array(
             "name" => "Twitter",
-            "text" => "My Tweets",
+            "text" => "Tweets",
             "url" => "twitter.com/%s"),
 
         "vimeo" => array(
             "name" => "Vimeo",
-            "text" => "My Vimeo Videos",
+            "text" => "Vimeo Videos",
             "url" => "vimeo.com/%s"),
         
         "viddler" => array(
             "name" => "Viddler",
-            "text" => "My Viddler Videos",
+            "text" => "Viddler Videos",
             "url" => "viddler.com/explore/%s"),
 
         "virb" => array(
             "name" => "Virb",
-            "text" => "My Virb Profile",
+            "text" => "Virb Profile",
             "url" => "virb.com/%s"),
 
         "youtube" => array(
             "name" => "YouTube",
-            "text" => "My YouTube Videos",
+            "text" => "YouTube Videos",
             "url" => "youtube.com/user/%s"),
     );
     
@@ -142,9 +152,13 @@ class SG {
         $this->services = $this->settings->services;
     }
     
+    function get_default_desc($service) {
+        return $this->default_services[$service->slug]['text'];
+    }
+
     function create_button($service) {
         $prefix = ($service->slug == 'rss') ? '' : 'http://';
-        return '<li class="button '.$service->slug.'"><a href="'.$prefix.$service->url.'" target="_blank" title="'.$service->description.'">'.$service->description.'</a></li>';
+        return '<li class="button '.$service->slug.'"><a href="'.$prefix.$service->url.'" target="_blank" title="'.$this->get_default_desc($service).'">'.$this->get_default_desc($service).'</a></li>';
     }
     
     function display() {
@@ -193,7 +207,7 @@ class SGAdmin extends SG {
     }
     
     function create_grid_item($service) {
-        return '<li class="socialgrid-item '.$service->slug.'">'.$service->name.'</li>';
+        return '<li class="socialgrid-item '.$service->slug.'">'.$this->get_default_desc($service).'</li>';
     }
     
     function render_buttons() {
@@ -217,4 +231,3 @@ class SGAdmin extends SG {
         return (count($this->services) < 15) ? true : false;
     }
 }
-?>
